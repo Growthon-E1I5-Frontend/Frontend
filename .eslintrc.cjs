@@ -104,6 +104,7 @@ module.exports = {
         labelAttributes: ['htmlFor'],
       },
     ],
+    'react/require-default-props': 'off',
     'react/no-unknown-property': ['error', { ignore: ['charSet'] }],
     'no-use-before-define': ['error'],
     '@typescript-eslint/no-shadow': ['error'],
