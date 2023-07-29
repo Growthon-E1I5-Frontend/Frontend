@@ -1,6 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import Accordion from './Accordion';
 import AttachImage from './AttachImage';
+import ImageCropper from './ImageCropper';
+import useImageUploader from '../hooks/useImageUploader';
 
 const Container = styled.div`
   display: flex;
@@ -22,16 +26,37 @@ const LinkInput = styled(LinkTitleInput)`
 `;
 
 export default function LinkTab() {
+  const {
+    uploadImage,
+    compressedImage,
+    handleUploadImage,
+    handleCompressImage,
+  } = useImageUploader();
+
+  useEffect(() => {
+    if (uploadImage) {
+      handleCompressImage();
+    }
+  }, [uploadImage]);
+
   return (
     <Accordion title="링크">
-      <div>
-        <h4>대표 이미지</h4>
-        <Container>
-          <AttachImage width={40} height={40} IconWidth={28} IconHeight={28} />
-          <LinkTitleInput placeholder="링크 제목" />
-        </Container>
-        <LinkInput type="url" placeholder="연결할 링크 주소" />
-      </div>
+      <Container>
+        <ImageCropper aspectRatio={1 / 1} onCrop={handleUploadImage}>
+          {compressedImage ? (
+            <AttachImage
+              width={40}
+              height={40}
+              imgSrc={compressedImage!}
+              imgAlt="compressedImg"
+            />
+          ) : (
+            <AttachImage width={40} height={40} />
+          )}
+        </ImageCropper>
+        <LinkTitleInput placeholder="링크 제목" />
+      </Container>
+      <LinkInput type="url" placeholder="연결할 링크 주소" />
     </Accordion>
   );
 }

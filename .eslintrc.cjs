@@ -104,6 +104,7 @@ module.exports = {
         labelAttributes: ['htmlFor'],
       },
     ],
+    'jsx-a11y/no-static-element-interactions': 'off',
     'react/require-default-props': 'off',
     'react/no-unknown-property': ['error', { ignore: ['charSet'] }],
     'no-use-before-define': ['error'],
