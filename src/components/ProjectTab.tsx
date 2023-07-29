@@ -25,14 +25,10 @@ const InProgress = styled.div`
   align-items: center;
 `;
 
-const DateInput = styled.input`
+const DateInput = styled(Input)`
   width: 88px;
-  height: 40px;
-  padding: 8px 16px;
-  outline: none;
   border: 1px solid #f3f3f3;
-  border-radius: 8px;
-  font-size: 12px;
+  background-color: #fff;
   &::placeholder {
     height: 24px;
     color: #9d9d9d;
