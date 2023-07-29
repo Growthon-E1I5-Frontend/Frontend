@@ -98,6 +98,12 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/default-param-last': 'error',
     'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        labelAttributes: ['htmlFor'],
+      },
+    ],
     'react/no-unknown-property': ['error', { ignore: ['charSet'] }],
     'no-use-before-define': ['error'],
     '@typescript-eslint/no-shadow': ['error'],
