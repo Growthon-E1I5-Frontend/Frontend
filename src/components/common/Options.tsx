@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { styled as muiStyled } from '@mui/material/styles';
 import Switch, { SwitchProps } from '@mui/material/Switch';
-import Delete from '../assets/delete.svg';
+import Delete from '../../assets/delete.svg';
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 

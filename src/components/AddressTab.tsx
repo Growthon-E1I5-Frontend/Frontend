@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import styled from 'styled-components';
 import useImageUploader from '../hooks/useImageUploader';
-import Accordion from './Accordion';
+import Accordion from './common/Accordion';
 import ImageCropper from './ImageCropper';
 import AttachImage from './common/AttachImage';
 import Input from './common/Input';

@@ -1,9 +1,9 @@
 import { ReactNode, useState } from 'react';
 import styled from 'styled-components';
-import Drag from '../assets/drag.svg';
-import Icon from '../assets/toolIcon.svg';
-import Open from '../assets/downArrow.svg';
-import Close from '../assets/upArrow.svg';
+import Drag from '../../assets/drag.svg';
+import Icon from '../../assets/toolIcon.svg';
+import Open from '../../assets/downArrow.svg';
+import Close from '../../assets/upArrow.svg';
 import Options from './Options';
 
 interface ITitle {
