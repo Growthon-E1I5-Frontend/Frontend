@@ -19,6 +19,10 @@ const Input = styled.input<InputProps>`
   &::placeholder {
     color: #9d9d9d;
   }
+  &:focus {
+    border: ${(props) =>
+      props.border?.includes('E86363') ? props.border : '1px solid #7163E8'};
+  }
 `;
 
 export default Input;

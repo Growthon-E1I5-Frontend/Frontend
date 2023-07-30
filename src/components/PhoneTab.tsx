@@ -1,10 +1,16 @@
 import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import Accordion from './common/Accordion';
 import AttachImage from './common/AttachImage';
 import ImageCropper from './ImageCropper';
 import useImageUploader from '../hooks/useImageUploader';
 import Input from './common/Input';
+
+interface IPhoneTabForm {
+  country: string;
+  phone: number;
+}
 
 const CountryWrapper = styled.div`
   display: flex;
@@ -18,6 +24,10 @@ export default function PhoneTab() {
     handleUploadImage,
     handleCompressImage,
   } = useImageUploader();
+  const {
+    register,
+    formState: { errors },
+  } = useForm<IPhoneTabForm>({ mode: 'onChange' });
 
   useEffect(() => {
     if (uploadImage) {
@@ -41,17 +51,22 @@ export default function PhoneTab() {
           )}
         </ImageCropper>
         <Input
+          {...register('country', { required: true })}
           placeholder="국가번호"
           width={257}
           backgroundColor="#F3F3F3"
-          border="none"
+          border={errors.country?.message ? '1px solid #E86363' : 'none'}
         />
       </CountryWrapper>
       <Input
+        {...register('phone', {
+          required: true,
+          pattern: { value: /^[0-9]+$/, message: 'Numbers Only' },
+        })}
         placeholder="전화번호"
         width={305}
         backgroundColor="#F3F3F3"
-        border="none"
+        border={errors.phone?.message ? '1px solid #E86363' : 'none'}
       />
     </Accordion>
   );

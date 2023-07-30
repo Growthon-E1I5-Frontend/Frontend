@@ -14,7 +14,7 @@ const ImgPreview = styled.img`
   width: 96px;
   height: 96px;
   border-radius: 8px;
-  margin: 0 10px;
+  margin: 0 10px 6px 10px;
 `;
 
 const Loading = styled.p`
