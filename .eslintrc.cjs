@@ -89,6 +89,8 @@ module.exports = {
         next: 'directive',
       },
     ],
+    'no-plusplus': 'off',
+    'import/prefer-default-export': 'off',
     'default-param-last': 'off',
     'import/newline-after-import': 'error',
     '@typescript-eslint/no-unused-vars': 'error',

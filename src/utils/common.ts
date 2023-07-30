@@ -1,5 +1,3 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable import/prefer-default-export */
 export const dataURItoFile = (dataURI: string) => {
   const byteString = atob(dataURI.split(',')[1]);
   const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
