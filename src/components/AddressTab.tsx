@@ -1,8 +1,15 @@
 import { useEffect } from 'react';
+import styled from 'styled-components';
 import useImageUploader from '../hooks/useImageUploader';
 import Accordion from './Accordion';
 import ImageCropper from './ImageCropper';
-import AttachImage from './AttachImage';
+import AttachImage from './common/AttachImage';
+import Input from './common/Input';
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 export default function AddressTab() {
   const {
@@ -20,7 +27,7 @@ export default function AddressTab() {
 
   return (
     <Accordion title="주소">
-      <div>
+      <Wrapper>
         <ImageCropper aspectRatio={1 / 1} onCrop={handleUploadImage}>
           {compressedImage ? (
             <AttachImage
@@ -33,10 +40,25 @@ export default function AddressTab() {
             <AttachImage width={40} height={40} />
           )}
         </ImageCropper>
-        <input />
-      </div>
-      <input />
-      <input />
+        <Input
+          width={257}
+          backgroundColor="#f3f3f3"
+          border="none"
+          placeholder="주소"
+        />
+      </Wrapper>
+      <Input
+        width={305}
+        backgroundColor="#f3f3f3"
+        border="none"
+        placeholder="상세주소"
+      />
+      <Input
+        width={305}
+        backgroundColor="#f3f3f3"
+        border="none"
+        placeholder="우편번호"
+      />
     </Accordion>
   );
 }

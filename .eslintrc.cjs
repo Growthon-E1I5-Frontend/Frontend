@@ -106,6 +106,7 @@ module.exports = {
       },
     ],
     'jsx-a11y/no-static-element-interactions': 'off',
+    'jsx-a11y/no-noninteractive-element-interactions': 'off',
     'react/require-default-props': 'off',
     'react/no-unknown-property': ['error', { ignore: ['charSet'] }],
     'react-hooks/exhaustive-deps': 'off',

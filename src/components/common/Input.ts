@@ -11,6 +11,7 @@ const Input = styled.input<InputProps>`
   height: 40px;
   background-color: ${(props) => props.backgroundColor};
   padding: 8px 16px;
+  margin-bottom: 6px;
   outline: none;
   border: ${(props) => props.border};
   border-radius: 8px;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import AddIcon from '../assets/ImageAdd.svg';
+import AddIcon from '../../assets/ImageAdd.svg';
 
 interface AttachImageProps {
   width: number;
@@ -15,6 +15,7 @@ const Img = styled.img<AttachImageProps>`
   width: ${(props) => props.width}px;
   height: ${(props) => props.height}px;
   border-radius: 8px;
+  margin: 0 6px 6px 0;
 `;
 
 export default function AttachImage({
