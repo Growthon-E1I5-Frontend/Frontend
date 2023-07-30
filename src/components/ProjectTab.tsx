@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-shadow */
 import { useEffect } from 'react';
 import styled from 'styled-components';
 import AttachImage from './AttachImage';
@@ -24,7 +22,7 @@ const Loading = styled.p`
 `;
 
 const Input = styled.input`
-  width: 281px;
+  width: 305px;
   height: 40px;
   background-color: #f3f3f3;
   padding: 8px 16px;
@@ -47,7 +45,7 @@ const InProgress = styled.div`
 `;
 
 const DateInput = styled(Input)`
-  width: 88px;
+  width: 108px;
   border: 1px solid #f3f3f3;
   background-color: #fff;
   &::placeholder {

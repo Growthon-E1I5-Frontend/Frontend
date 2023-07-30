@@ -34,6 +34,7 @@ const Modal = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  border-radius: 8px;
 `;
 
 const Title = styled.div`

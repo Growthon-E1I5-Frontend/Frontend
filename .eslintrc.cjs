@@ -97,6 +97,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/default-param-last': 'error',
+    '@typescript-eslint/no-shadow': 'off',
     'jsx-a11y/click-events-have-key-events': 'off',
     'jsx-a11y/label-has-associated-control': [
       2,
@@ -107,7 +108,7 @@ module.exports = {
     'jsx-a11y/no-static-element-interactions': 'off',
     'react/require-default-props': 'off',
     'react/no-unknown-property': ['error', { ignore: ['charSet'] }],
+    'react-hooks/exhaustive-deps': 'off',
     'no-use-before-define': ['error'],
-    '@typescript-eslint/no-shadow': ['error'],
   },
 };

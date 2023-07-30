@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-shadow */
-// useImageUploader.ts
 import { useState } from 'react';
 import useImageCompress from './useImageCompress';
 import { dataURItoFile } from '../utils/common';
