@@ -4,24 +4,10 @@ import Accordion from './Accordion';
 import AttachImage from './AttachImage';
 import ImageCropper from './ImageCropper';
 import useImageUploader from '../hooks/useImageUploader';
+import Input from './common/Input';
 
 const Container = styled.div`
   display: flex;
-`;
-
-const LinkTitleInput = styled.input`
-  width: 257px;
-  height: 40px;
-  background-color: #f3f3f3;
-  padding: 8px 16px;
-  outline: none;
-  border: none;
-  border-radius: 8px;
-  font-size: 12px;
-`;
-
-const LinkInput = styled(LinkTitleInput)`
-  width: 305px;
 `;
 
 export default function LinkTab() {
@@ -53,9 +39,20 @@ export default function LinkTab() {
             <AttachImage width={40} height={40} />
           )}
         </ImageCropper>
-        <LinkTitleInput placeholder="링크 제목" />
+        <Input
+          placeholder="링크 제목"
+          width={257}
+          backgroundColor="#f3f3f3"
+          border="none"
+        />
       </Container>
-      <LinkInput type="url" placeholder="연결할 링크 주소" />
+      <Input
+        type="url"
+        placeholder="연결할 링크 주소"
+        width={305}
+        backgroundColor="#f3f3f3"
+        border="none"
+      />
     </Accordion>
   );
 }

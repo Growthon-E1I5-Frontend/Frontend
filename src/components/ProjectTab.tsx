@@ -4,6 +4,7 @@ import AttachImage from './AttachImage';
 import Accordion from './Accordion';
 import ImageCropper from './ImageCropper';
 import useImageUploader from '../hooks/useImageUploader';
+import Input from './common/Input';
 
 const ImageWrapper = styled.div`
   display: flex;
@@ -21,37 +22,9 @@ const Loading = styled.p`
   margin: 0 10px;
 `;
 
-const Input = styled.input`
-  width: 305px;
-  height: 40px;
-  background-color: #f3f3f3;
-  padding: 8px 16px;
-  outline: none;
-  border: none;
-  border-radius: 8px;
-  font-size: 12px;
-  &:last-child {
-    background-color: #fff;
-    border: 1px solid #f3f3f3;
-  }
-  &::placeholder {
-    color: #9d9d9d;
-  }
-`;
-
 const InProgress = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const DateInput = styled(Input)`
-  width: 108px;
-  border: 1px solid #f3f3f3;
-  background-color: #fff;
-  &::placeholder {
-    height: 24px;
-    color: #9d9d9d;
-  }
 `;
 
 const To = styled.span`
@@ -110,17 +83,37 @@ export default function ProjectTab() {
       </ImageWrapper>
       <div>
         <h4>프로젝트 설명</h4>
-        <Input placeholder="프로젝트명" />
+        <Input
+          placeholder="프로젝트명"
+          width={305}
+          backgroundColor="#f3f3f3"
+          border="none"
+        />
         <InProgress>
-          <DateInput placeholder="YYYY.MM" />
+          <Input
+            placeholder="YYYY.MM"
+            width={108}
+            backgroundColor="#fff"
+            border="1px solid #f3f3f3"
+          />
           <To>~</To>
-          <DateInput placeholder="YYYY.MM" />
+          <Input
+            placeholder="YYYY.MM"
+            width={108}
+            backgroundColor="#fff"
+            border="1px solid #f3f3f3"
+          />
           <InProgressCheckboxWrapper>
             <InProgressCheckbox type="checkbox" id="inProgress" />
             <InProgressLabel htmlFor="inProgress">진행 중</InProgressLabel>
           </InProgressCheckboxWrapper>
         </InProgress>
-        <Input placeholder="담당 역할" />
+        <Input
+          placeholder="담당 역할"
+          width={305}
+          backgroundColor="#fff"
+          border="1px solid #f3f3f3"
+        />
       </div>
     </Accordion>
   );

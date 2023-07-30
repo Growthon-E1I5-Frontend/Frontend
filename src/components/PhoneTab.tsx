@@ -4,28 +4,11 @@ import Accordion from './Accordion';
 import AttachImage from './AttachImage';
 import ImageCropper from './ImageCropper';
 import useImageUploader from '../hooks/useImageUploader';
-
-interface InputProps {
-  width: number;
-}
+import Input from './common/Input';
 
 const CountryWrapper = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const Input = styled.input<InputProps>`
-  width: ${(props) => props.width}px;
-  height: 40px;
-  padding: 8px 16px;
-  outline: none;
-  border: none;
-  border-radius: 8px;
-  background-color: #f3f3f3;
-  font-size: 12px;
-  &::placeholder {
-    color: #9d9d9d;
-  }
 `;
 
 export default function PhoneTab() {
@@ -57,9 +40,19 @@ export default function PhoneTab() {
             <AttachImage width={40} height={40} />
           )}
         </ImageCropper>
-        <Input placeholder="국가번호" width={257} />
+        <Input
+          placeholder="국가번호"
+          width={257}
+          backgroundColor="#F3F3F3"
+          border="none"
+        />
       </CountryWrapper>
-      <Input placeholder="전화번호" width={305} />
+      <Input
+        placeholder="전화번호"
+        width={305}
+        backgroundColor="#F3F3F3"
+        border="none"
+      />
     </Accordion>
   );
 }
