@@ -6,10 +6,12 @@ import ImageTab from './components/ImageTab';
 import LinkTab from './components/LinkTab';
 import PhoneTab from './components/PhoneTab';
 import ProjectTab from './components/ProjectTab';
+import TextTab from './components/TextTab';
 
 function App() {
   return (
     <>
+      <TextTab />
       <ProjectTab />
       <ImageTab />
       <LinkTab />
