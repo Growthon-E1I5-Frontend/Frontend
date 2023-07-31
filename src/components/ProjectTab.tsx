@@ -8,6 +8,16 @@ import useImageUploader from '../hooks/useImageUploader';
 import Input from './common/Input';
 import Checked from '../assets/check.svg';
 import NonChecked from '../assets/nonCheck.svg';
+import {
+  BreakPoint,
+  InPrograssState,
+  InProgressCheckboxWrapper,
+  InProgressLabel,
+  ProjectPeriod,
+  ProjectTerm,
+  ProjectTermInput,
+  To,
+} from './common/ProjectPeriod';
 
 interface IProjectTabForm {
   title: string;
@@ -32,55 +42,6 @@ const ImgPreview = styled.img`
 
 const Loading = styled.p`
   margin: 0 10px;
-`;
-
-const InProgress = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 6px;
-`;
-
-const ProjectTerm = styled.div`
-  display: flex;
-  width: 108px;
-  border: 1px solid #f3f3f3;
-  padding: 8px 16px;
-  border-radius: 8px;
-  &:focus-within {
-    border: 1px solid #7163e8;
-  }
-`;
-
-const InProgressInput = styled.input`
-  width: 35px;
-  outline: none;
-  border: none;
-  font-size: 12px;
-`;
-
-const BreakPoint = styled.span`
-  padding-bottom: 5px;
-  color: #9d9d9d;
-`;
-
-const To = styled.span`
-  font-weight: 600;
-  color: #9d9d9d;
-  margin: 0 5px;
-`;
-
-const InProgressCheckboxWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const InPrograssState = styled.img`
-  margin: 0 5px;
-`;
-
-const InProgressLabel = styled.span`
-  font-size: 12px;
-  color: #9d9d9d;
 `;
 
 export default function ProjectTab() {
@@ -131,17 +92,61 @@ export default function ProjectTab() {
           backgroundColor="#f3f3f3"
           border={errors.title?.message ? '1px solid #E86363' : 'none'}
         />
-        <InProgress>
-          <ProjectTerm>
-            <InProgressInput {...register('startYear')} placeholder="YYYY" />
+        <ProjectPeriod>
+          <ProjectTerm
+            border={
+              errors.startYear?.message || errors.startMonth?.message
+                ? '#E86363'
+                : '#7163e8'
+            }
+          >
+            <ProjectTermInput
+              {...register('startYear', {
+                pattern: {
+                  value: /^[0-9]+$/,
+                  message: 'Numbers Only',
+                },
+              })}
+              placeholder="YYYY"
+            />
             <BreakPoint>.</BreakPoint>
-            <InProgressInput {...register('startMonth')} placeholder="MM" />
+            <ProjectTermInput
+              {...register('startMonth', {
+                pattern: {
+                  value: /^[0-9]+$/,
+                  message: 'Numbers Only',
+                },
+              })}
+              placeholder="MM"
+            />
           </ProjectTerm>
           <To>~</To>
-          <ProjectTerm>
-            <InProgressInput {...register('endYear')} placeholder="YYYY" />
+          <ProjectTerm
+            border={
+              errors.endYear?.message || errors.endMonth?.message
+                ? '#E86363'
+                : '#7163e8'
+            }
+          >
+            <ProjectTermInput
+              {...register('endYear', {
+                pattern: {
+                  value: /^[0-9]+$/,
+                  message: 'Numbers Only',
+                },
+              })}
+              placeholder="YYYY"
+            />
             <BreakPoint>.</BreakPoint>
-            <InProgressInput {...register('endMonth')} placeholder="MM" />
+            <ProjectTermInput
+              {...register('endMonth', {
+                pattern: {
+                  value: /^[0-9]+$/,
+                  message: 'Numbers Only',
+                },
+              })}
+              placeholder="MM"
+            />
           </ProjectTerm>
           <InProgressCheckboxWrapper>
             {isChecked ? (
@@ -159,7 +164,7 @@ export default function ProjectTab() {
             )}
             <InProgressLabel>진행 중</InProgressLabel>
           </InProgressCheckboxWrapper>
-        </InProgress>
+        </ProjectPeriod>
         <Input
           placeholder="담당 역할"
           width={305}
