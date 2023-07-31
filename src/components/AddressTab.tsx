@@ -11,6 +11,7 @@ interface IAddress {
 }
 
 interface IAddressTabForm {
+  fullAddress: string;
   detailAddress: string;
   zipcode: string;
 }
@@ -37,11 +38,11 @@ const Backdrop = styled.div`
 export default function AddressTab() {
   const { register } = useForm<IAddressTabForm>();
   const [showModal, setShowModal] = useState(false);
-  const [address, setAddress] = useState('');
+  const [fullAddress, setFullAddress] = useState('');
   const [zipcode, setZipcode] = useState('');
 
   const handleComplete = ({ address, zonecode }: IAddress) => {
-    setAddress(address);
+    setFullAddress(address);
     setZipcode(zonecode);
     setShowModal((curr) => !curr);
   };
@@ -68,12 +69,13 @@ export default function AddressTab() {
       ) : null}
       <Accordion title="주소">
         <Input
+          {...register('fullAddress')}
           onFocus={() => setShowModal(true)}
           width={305}
           backgroundColor="#f3f3f3"
           border="none"
           placeholder="주소"
-          defaultValue={address}
+          defaultValue={fullAddress}
         />
         <Input
           {...register('detailAddress')}
@@ -89,6 +91,7 @@ export default function AddressTab() {
           border="none"
           placeholder="우편번호"
           defaultValue={zipcode}
+          readOnly
         />
       </Accordion>
     </>
