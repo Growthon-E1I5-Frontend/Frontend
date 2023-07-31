@@ -28,7 +28,7 @@ const Contents = styled.div`
 const ContentsSummary = styled.div`
   box-sizing: border-box;
   width: 100%;
-  padding: 15px;
+  padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,7 +38,7 @@ const Img = styled.img`
   margin-right: 10px;
   cursor: pointer;
   &:last-child {
-    margin-right: 5px;
+    margin-right: 0;
   }
 `;
 
