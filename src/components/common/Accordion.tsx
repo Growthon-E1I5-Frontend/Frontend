@@ -37,6 +37,9 @@ const ContentsSummary = styled.div`
 const Img = styled.img`
   margin-right: 10px;
   cursor: pointer;
+  &:last-child {
+    margin-right: 5px;
+  }
 `;
 
 const ContentsTitleWrapper = styled.div``;
@@ -46,6 +49,9 @@ const ContentsTitle = styled.span`
 `;
 
 const DropDownButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0;
   border: none;
   outline: none;
