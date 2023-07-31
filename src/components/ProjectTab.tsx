@@ -11,8 +11,10 @@ import NonChecked from '../assets/nonCheck.svg';
 
 interface IProjectTabForm {
   title: string;
-  startDate: number;
-  endDate: number;
+  startYear: number;
+  startMonth: number;
+  endYear: number;
+  endMonth: number;
   role: string;
 }
 
@@ -35,6 +37,30 @@ const Loading = styled.p`
 const InProgress = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 6px;
+`;
+
+const ProjectTerm = styled.div`
+  display: flex;
+  width: 108px;
+  border: 1px solid #f3f3f3;
+  padding: 8px 16px;
+  border-radius: 8px;
+  &:focus-within {
+    border: 1px solid #7163e8;
+  }
+`;
+
+const InProgressInput = styled.input`
+  width: 35px;
+  outline: none;
+  border: none;
+  font-size: 12px;
+`;
+
+const BreakPoint = styled.span`
+  padding-bottom: 5px;
+  color: #9d9d9d;
 `;
 
 const To = styled.span`
@@ -60,7 +86,6 @@ const InProgressLabel = styled.span`
 export default function ProjectTab() {
   const {
     register,
-    handleSubmit,
     formState: { errors },
   } = useForm<IProjectTabForm>({ mode: 'onChange' });
   const {
@@ -80,10 +105,6 @@ export default function ProjectTab() {
 
   const handleCheck = () => setIsChecked((prev) => !prev);
 
-  const onValid = ({ title, startDate, endDate, role }: IProjectTabForm) => {
-    console.log(title, startDate, endDate, role);
-  };
-
   return (
     <Accordion title="대표 프로젝트">
       <h4>대표 이미지</h4>
@@ -99,7 +120,7 @@ export default function ProjectTab() {
           </Loading>
         )}
       </ImageWrapper>
-      <form onSubmit={handleSubmit(onValid)}>
+      <form>
         <h4>프로젝트 설명</h4>
         <Input
           {...register('title', {
@@ -111,21 +132,17 @@ export default function ProjectTab() {
           border={errors.title?.message ? '1px solid #E86363' : 'none'}
         />
         <InProgress>
-          <Input
-            placeholder="YYYY.MM"
-            width={108}
-            backgroundColor="#fff"
-            border="1px solid #f3f3f3"
-            {...register('startDate', { required: true })}
-          />
+          <ProjectTerm>
+            <InProgressInput {...register('startYear')} placeholder="YYYY" />
+            <BreakPoint>.</BreakPoint>
+            <InProgressInput {...register('startMonth')} placeholder="MM" />
+          </ProjectTerm>
           <To>~</To>
-          <Input
-            placeholder="YYYY.MM"
-            width={108}
-            backgroundColor="#fff"
-            border="1px solid #f3f3f3"
-            {...register('endDate', { required: true })}
-          />
+          <ProjectTerm>
+            <InProgressInput {...register('endYear')} placeholder="YYYY" />
+            <BreakPoint>.</BreakPoint>
+            <InProgressInput {...register('endMonth')} placeholder="MM" />
+          </ProjectTerm>
           <InProgressCheckboxWrapper>
             {isChecked ? (
               <InPrograssState
