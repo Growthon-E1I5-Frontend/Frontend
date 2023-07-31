@@ -15,7 +15,6 @@ interface IStyledProps {
 }
 
 const Contents = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -23,6 +22,7 @@ const Contents = styled.div`
   width: 361px;
   border: 1px solid lightgray;
   border-radius: 8px;
+  margin-bottom: 10px;
 `;
 
 const ContentsSummary = styled.div`
