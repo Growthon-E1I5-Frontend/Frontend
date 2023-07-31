@@ -16,7 +16,6 @@ export default function EmailTab() {
     <Accordion title="이메일">
       <Input
         {...register('email', {
-          required: true,
           pattern: {
             value: /^[a-zA-Z0-9._%+-]+@[a-z]+\.[a-z]+$/,
             message: 'Invalidate Email',
