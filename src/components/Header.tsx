@@ -5,13 +5,14 @@ import Preview from './Preview';
 import { IHandlePreview } from '../types/IHandlePreview';
 
 const StickyTop = styled.header`
-  font-family: 'Noto Sans KR', sans-serif;
   width: 100%;
   font-size: 16px;
   letter-spacing: -0.02em;
   width: 393px;
   height: 60px;
-  top: 51px;
+  position: fixed;
+  top: 0;
+  height: 51px;
   padding: 0 10px;
   display: flex;
   justify-content: space-between;

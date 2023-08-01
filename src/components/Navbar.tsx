@@ -7,6 +7,7 @@ import { IoEllipsisHorizontalOutline } from 'react-icons/io5';
 import { ReactComponent as PreviewIcon } from '../assets/preview.svg';
 import Preview from './Preview';
 import { IHandlePreview } from '../types/IHandlePreview';
+import Exit from './Exit';
 
 interface IPathname {
   $isActive?: boolean;
@@ -83,8 +84,14 @@ function Navbar({ onClick, isShow }: IHandlePreview) {
             </Tab>
           </Link>
           <Tab onClick={onClick}>
-            <PreviewTab />
-            <PreviewTitle>미리보기</PreviewTitle>
+            {isShow ? (
+              <Exit />
+            ) : (
+              <>
+                <PreviewTab />
+                <PreviewTitle>미리보기</PreviewTitle>
+              </>
+            )}
           </Tab>
           <Link to="/analytics">
             <Tab $isActive={pathname === '/analytics'}>
