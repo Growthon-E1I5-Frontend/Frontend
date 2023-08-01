@@ -13,10 +13,13 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
+  width: 393px;
   height: calc(100% - 111px);
   margin-top: 51px;
   margin-bottom: 60px;
+  position: relative;
   overflow: auto;
+  background-color: #fafafa;
 `;
 
 function RootLayout() {
