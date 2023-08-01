@@ -6,12 +6,12 @@ import Page from '../pages/Page';
 import Theme from '../pages/Theme';
 import Analytics from '../pages/Analytics';
 import Setting from '../pages/Setting';
-import RootLayout from '../pages/RootLayout';
+import Layout from '../components/layout/Layout';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootLayout />,
+    element: <Layout />,
     children: [
       { path: '/', element: <LandingPage /> },
       { path: '/page', element: <Page /> },

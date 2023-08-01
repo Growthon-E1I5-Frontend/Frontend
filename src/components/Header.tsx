@@ -1,16 +1,23 @@
 import styled from 'styled-components';
 import { ReactComponent as ProfileSwitchIcon } from '../assets/profile_switch.svg';
-import { ReactComponent as Logo } from '../assets/wity_color_text_logo 1.svg';
+import { ReactComponent as Logo } from '../assets/preview_text.svg';
 
 const StickyTop = styled.header`
   font-family: 'Noto Sans KR', sans-serif;
+  width: 100%;
   font-size: 16px;
   letter-spacing: -0.02em;
   width: 393px;
   height: 60px;
   top: 51px;
+  padding: 0 10px;
   display: flex;
-  /* justify-content: space-between; */
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
   align-items: center;
 `;
 
@@ -18,12 +25,15 @@ const HeaderLink = styled.p`
   font-weight: 500;
   text-decoration: underline;
   cursor: pointer;
+  margin-left: 15px;
 `;
 
 const PreviewBtn = styled.button`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  margin-right: 10px;
   width: 96px;
   height: 36px;
   border-radius: 24px;
@@ -46,13 +56,16 @@ const ProfileSwitch = styled.button`
 function Header() {
   return (
     <StickyTop>
-      <Logo style={{ cursor: 'pointer' }} />
-      <HeaderLink>wity.im/</HeaderLink>
-      <HeaderLink>wityvity</HeaderLink>
-      <PreviewBtn>미리보기</PreviewBtn>
-      <ProfileSwitch>
-        <ProfileSwitchIcon />
-      </ProfileSwitch>
+      <Wrapper>
+        <Logo style={{ cursor: 'pointer' }} />
+        <HeaderLink>wity.im/user</HeaderLink>
+      </Wrapper>
+      <Wrapper>
+        <PreviewBtn>미리보기</PreviewBtn>
+        <ProfileSwitch>
+          <ProfileSwitchIcon />
+        </ProfileSwitch>
+      </Wrapper>
     </StickyTop>
   );
 }

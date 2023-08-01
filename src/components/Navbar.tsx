@@ -1,121 +1,101 @@
-import { NavLink } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import Preview from './PreviewBtn';
-import { ReactComponent as PageIcon } from '../assets/page.svg';
-import { ReactComponent as ThemeIcon } from '../assets/theme.svg';
-import { ReactComponent as AnalyticsIcon } from '../assets/analytics.svg';
-import { ReactComponent as SettingIcon } from '../assets/setting.svg';
+import { CiUser } from 'react-icons/ci';
+import { PiPaintBrushBroadLight } from 'react-icons/pi';
+import { BsGraphDown } from 'react-icons/bs';
+import { IoEllipsisHorizontalOutline } from 'react-icons/io5';
+import { ReactComponent as PreviewIcon } from '../assets/preview.svg';
 
-const Page = styled(PageIcon)`
-  path {
-    width: 20px;
-    height: 20px;
-  }
-  &:hover {
-    path {
-      fill: #7163e8;
-    }
-  }
-`;
+interface IPathname {
+  $isActive?: boolean;
+}
 
-const Theme = styled(ThemeIcon)`
-  path {
-    width: 14px;
-    height: 20px;
-  }
-  &:hover {
-    path {
-      fill: #7163e8;
-    }
-  }
-`;
-
-const Analytics = styled(AnalyticsIcon)`
-  path {
-    width: 18px;
-    height: 19px;
-  }
-  &:hover {
-    path {
-      fill: #7163e8;
-    }
-  }
-`;
-
-const Footer = styled.footer`
-  font-family: 'Noto Sans KR', sans-serif;
+const Navigation = styled.nav`
+  position: fixed;
+  bottom: 0;
   width: 393px;
   height: 60px;
-  top: 792px;
+  padding: 12px;
   border-top: 1px solid;
   border-top-color: #f3f3f3;
   background: #ffffff;
 `;
 
-const List = styled.li`
+const ListTab = styled.ul`
   display: flex;
   justify-content: space-between;
 `;
 
-const StyledSpan = styled.span`
-  position: relative;
-  top: 20px;
-  color: #9d9d9d;
-  font-size: 10px;
-  font-weight: 600;
-  line-height: 24px;
-  letter-spacing: -0.02em;
-  text-align: center;
-  cursor: pointer;
+const Tab = styled.li<IPathname>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: ${(props) => (props.$isActive ? '#7163e8' : '#9d9d9d')};
   &:hover {
     color: #7163e8;
   }
 `;
 
-const StyledNav = styled(NavLink)`
-  display: flex;
-  flex-direction: column;
-  color: #9d9d9d;
+const TabTitle = styled.span`
   font-size: 10px;
+  margin-top: 10px;
   font-weight: 600;
-  line-height: 24px;
-  letter-spacing: -0.02em;
-  text-align: center;
-  &.svg.hover {
-    fill: #7163e8;
-  }
-  &:hover,
-  &.active {
+`;
+
+const PreviewTab = styled(PreviewIcon)`
+  width: fit-content;
+  position: absolute;
+  bottom: 25px;
+  cursor: pointer;
+`;
+
+const PreviewTitle = styled.span`
+  position: absolute;
+  bottom: 7px;
+  font-size: 10px;
+  color: #9d9d9d;
+  font-weight: 600;
+  &:hover {
     color: #7163e8;
   }
 `;
 
 function Navbar() {
+  const { pathname } = useLocation();
+
   return (
-    <Footer>
-      <Preview />
-      <ul>
-        <List>
-          <StyledNav to="/page">
-            <Page />
-            <span>페이지</span>
-          </StyledNav>
-          <StyledNav to="/theme">
-            <Theme />
-            <span>테마</span>
-          </StyledNav>
-          <StyledSpan>미리보기</StyledSpan>
-          <StyledNav to="/analytics">
-            <Analytics />
-            분석
-          </StyledNav>
-          <StyledNav to="/setting">
-            <SettingIcon style={{ width: '18px', height: '20px' }} />
-            설정
-          </StyledNav>
-        </List>
-      </ul>
-    </Footer>
+    <Navigation>
+      <ListTab>
+        <Link to="/page">
+          <Tab $isActive={pathname === '/page'}>
+            <CiUser size="20" />
+            <TabTitle>페이지</TabTitle>
+          </Tab>
+        </Link>
+        <Link to="/theme">
+          <Tab $isActive={pathname === '/theme'}>
+            <PiPaintBrushBroadLight size="20" />
+            <TabTitle>테마</TabTitle>
+          </Tab>
+        </Link>
+        <Tab>
+          <PreviewTab />
+          <PreviewTitle>미리보기</PreviewTitle>
+        </Tab>
+        <Link to="/analytics">
+          <Tab $isActive={pathname === '/analytics'}>
+            <BsGraphDown size="20" />
+            <TabTitle>분석</TabTitle>
+          </Tab>
+        </Link>
+        <Link to="setting">
+          <Tab $isActive={pathname === '/setting'}>
+            <IoEllipsisHorizontalOutline size="20" />
+            <TabTitle>설정</TabTitle>
+          </Tab>
+        </Link>
+      </ListTab>
+    </Navigation>
   );
 }
 

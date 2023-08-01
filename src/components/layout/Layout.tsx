@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import Navbar from '../components/Navbar';
-import Header from '../components/Header';
+import Navbar from '../Navbar';
+import Header from '../Header';
 
 const Container = styled.div`
   display: flex;
