@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import Accordion from './common/Accordion';
-import Input from './common/Input';
+import Input from '../styles/Input';
 import {
   ProjectPeriod,
   ProjectTerm,
@@ -11,7 +11,7 @@ import {
   InProgressCheckboxWrapper,
   InPrograssState,
   InProgressLabel,
-} from './common/ProjectPeriod';
+} from '../styles/ProjectPeriod';
 import Checked from '../assets/check.svg';
 import NonChecked from '../assets/nonCheck.svg';
 import Add from '../assets/plus.svg';

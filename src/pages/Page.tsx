@@ -18,12 +18,7 @@ type ComponentType =
   | 'text'
   | 'link';
 
-const PageWrapper = styled.section`
-  overflow-y: scroll;
-  &::-webkit-scrollbar {
-    width: 0;
-  }
-`;
+const PageWrapper = styled.section``;
 
 const AddTabButton = styled.button`
   width: 361px;

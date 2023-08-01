@@ -5,7 +5,7 @@ import AttachImage from './common/AttachImage';
 import Accordion from './common/Accordion';
 import ImageCropper from './ImageCropper';
 import useImageUploader from '../hooks/useImageUploader';
-import Input from './common/Input';
+import Input from '../styles/Input';
 import Checked from '../assets/check.svg';
 import NonChecked from '../assets/nonCheck.svg';
 import {
@@ -16,7 +16,7 @@ import {
   ProjectTerm,
   ProjectTermInput,
   To,
-} from './common/ProjectPeriod';
+} from '../styles/ProjectPeriod';
 
 interface IProjectTabForm {
   title: string;

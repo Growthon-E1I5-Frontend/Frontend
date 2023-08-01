@@ -5,7 +5,7 @@ import Accordion from './common/Accordion';
 import AttachImage from './common/AttachImage';
 import ImageCropper from './ImageCropper';
 import useImageUploader from '../hooks/useImageUploader';
-import Input from './common/Input';
+import Input from '../styles/Input';
 
 interface ILinkTabForm {
   title: string;

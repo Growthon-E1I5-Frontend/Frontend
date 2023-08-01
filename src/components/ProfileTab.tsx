@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Input from './common/Input';
+import Input from '../styles/Input';
 import Icon from '../assets/profile_icon.svg';
 import Down from '../assets/downArrow.svg';
 import Close from '../assets/upArrow.svg';
