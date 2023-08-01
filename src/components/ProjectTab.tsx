@@ -9,7 +9,6 @@ import Input from './common/Input';
 import Checked from '../assets/check.svg';
 import NonChecked from '../assets/nonCheck.svg';
 import {
-  BreakPoint,
   InPrograssState,
   InProgressCheckboxWrapper,
   InProgressLabel,
@@ -89,8 +88,8 @@ export default function ProjectTab() {
           })}
           placeholder="프로젝트명"
           width={305}
-          backgroundColor="#f3f3f3"
-          border={errors.title?.message ? '1px solid #E86363' : 'none'}
+          backgroundColor="#fff"
+          border="1px solid #F3F3F3"
         />
         <ProjectPeriod>
           <ProjectTerm
@@ -107,9 +106,8 @@ export default function ProjectTab() {
                   message: 'Numbers Only',
                 },
               })}
-              placeholder="YYYY"
+              placeholder="YYYY."
             />
-            <BreakPoint>.</BreakPoint>
             <ProjectTermInput
               {...register('startMonth', {
                 pattern: {
@@ -135,9 +133,8 @@ export default function ProjectTab() {
                   message: 'Numbers Only',
                 },
               })}
-              placeholder="YYYY"
+              placeholder="YYYY."
             />
-            <BreakPoint>.</BreakPoint>
             <ProjectTermInput
               {...register('endMonth', {
                 pattern: {

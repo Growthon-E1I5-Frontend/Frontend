@@ -22,15 +22,16 @@ export const ProjectTerm = styled.div<IProjectTerm>`
 `;
 
 export const ProjectTermInput = styled.input`
-  width: 35px;
+  width: 37px;
   outline: none;
   border: none;
   font-size: 12px;
-`;
-
-export const BreakPoint = styled.span`
-  padding-bottom: 5px;
-  color: #9d9d9d;
+  &:disabled {
+    background-color: #fff;
+    &::placeholder {
+      color: #f3f3f3;
+    }
+  }
 `;
 
 export const To = styled.span`
