@@ -1,5 +1,5 @@
 import { AiFillCloseCircle } from 'react-icons/ai';
-import { styled } from 'styled-components';
+import styled from 'styled-components';
 
 const Close = styled.button`
   position: absolute;
