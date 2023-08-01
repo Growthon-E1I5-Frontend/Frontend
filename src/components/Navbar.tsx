@@ -5,6 +5,8 @@ import { PiPaintBrushBroadLight } from 'react-icons/pi';
 import { BsGraphDown } from 'react-icons/bs';
 import { IoEllipsisHorizontalOutline } from 'react-icons/io5';
 import { ReactComponent as PreviewIcon } from '../assets/preview.svg';
+import Preview from './Preview';
+import { IHandlePreview } from '../types/IHandlePreview';
 
 interface IPathname {
   $isActive?: boolean;
@@ -60,42 +62,45 @@ const PreviewTitle = styled.span`
   }
 `;
 
-function Navbar() {
+function Navbar({ onClick, isShow }: IHandlePreview) {
   const { pathname } = useLocation();
 
   return (
-    <Navigation>
-      <ListTab>
-        <Link to="/page">
-          <Tab $isActive={pathname === '/page'}>
-            <CiUser size="20" />
-            <TabTitle>페이지</TabTitle>
+    <>
+      {isShow && <Preview $isShow={isShow} />}
+      <Navigation>
+        <ListTab>
+          <Link to="/page">
+            <Tab $isActive={pathname === '/page'}>
+              <CiUser size="20" />
+              <TabTitle>페이지</TabTitle>
+            </Tab>
+          </Link>
+          <Link to="/theme">
+            <Tab $isActive={pathname === '/theme'}>
+              <PiPaintBrushBroadLight size="20" />
+              <TabTitle>테마</TabTitle>
+            </Tab>
+          </Link>
+          <Tab onClick={onClick}>
+            <PreviewTab />
+            <PreviewTitle>미리보기</PreviewTitle>
           </Tab>
-        </Link>
-        <Link to="/theme">
-          <Tab $isActive={pathname === '/theme'}>
-            <PiPaintBrushBroadLight size="20" />
-            <TabTitle>테마</TabTitle>
-          </Tab>
-        </Link>
-        <Tab>
-          <PreviewTab />
-          <PreviewTitle>미리보기</PreviewTitle>
-        </Tab>
-        <Link to="/analytics">
-          <Tab $isActive={pathname === '/analytics'}>
-            <BsGraphDown size="20" />
-            <TabTitle>분석</TabTitle>
-          </Tab>
-        </Link>
-        <Link to="setting">
-          <Tab $isActive={pathname === '/setting'}>
-            <IoEllipsisHorizontalOutline size="20" />
-            <TabTitle>설정</TabTitle>
-          </Tab>
-        </Link>
-      </ListTab>
-    </Navigation>
+          <Link to="/analytics">
+            <Tab $isActive={pathname === '/analytics'}>
+              <BsGraphDown size="20" />
+              <TabTitle>분석</TabTitle>
+            </Tab>
+          </Link>
+          <Link to="setting">
+            <Tab $isActive={pathname === '/setting'}>
+              <IoEllipsisHorizontalOutline size="20" />
+              <TabTitle>설정</TabTitle>
+            </Tab>
+          </Link>
+        </ListTab>
+      </Navigation>
+    </>
   );
 }
 

@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { ReactComponent as ProfileSwitchIcon } from '../assets/profile_switch.svg';
 import { ReactComponent as Logo } from '../assets/preview_text.svg';
+import Preview from './Preview';
+import { IHandlePreview } from '../types/IHandlePreview';
 
 const StickyTop = styled.header`
   font-family: 'Noto Sans KR', sans-serif;
@@ -53,20 +55,23 @@ const ProfileSwitch = styled.button`
   }
 `;
 
-function Header() {
+function Header({ onClick, isShow }: IHandlePreview) {
   return (
-    <StickyTop>
-      <Wrapper>
-        <Logo style={{ cursor: 'pointer' }} />
-        <HeaderLink>wity.im/user</HeaderLink>
-      </Wrapper>
-      <Wrapper>
-        <PreviewBtn>미리보기</PreviewBtn>
-        <ProfileSwitch>
-          <ProfileSwitchIcon />
-        </ProfileSwitch>
-      </Wrapper>
-    </StickyTop>
+    <>
+      {isShow && <Preview $isShow={isShow} />}
+      <StickyTop>
+        <Wrapper>
+          <Logo style={{ cursor: 'pointer' }} />
+          <HeaderLink>wity.im/user</HeaderLink>
+        </Wrapper>
+        <Wrapper>
+          <PreviewBtn onClick={onClick}>미리보기</PreviewBtn>
+          <ProfileSwitch>
+            <ProfileSwitchIcon />
+          </ProfileSwitch>
+        </Wrapper>
+      </StickyTop>
+    </>
   );
 }
 
