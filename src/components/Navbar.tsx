@@ -4,7 +4,7 @@ import { CiUser } from 'react-icons/ci';
 import { PiPaintBrushBroadLight } from 'react-icons/pi';
 import { BsGraphDown } from 'react-icons/bs';
 import { IoEllipsisHorizontalOutline } from 'react-icons/io5';
-import { ReactComponent as PreviewIcon } from '../assets/preview.svg';
+import PreviewIcon from '../assets/preview.svg';
 import Preview from './Preview';
 import { IHandlePreview } from '../types/IHandlePreview';
 import Exit from './Exit';
@@ -45,7 +45,7 @@ const TabTitle = styled.span`
   font-weight: 600;
 `;
 
-const PreviewTab = styled(PreviewIcon)`
+const PreviewTab = styled.img`
   width: fit-content;
   position: absolute;
   bottom: 25px;
@@ -88,7 +88,7 @@ function Navbar({ onClick, isShow }: IHandlePreview) {
               <Exit />
             ) : (
               <>
-                <PreviewTab />
+                <PreviewTab src={PreviewIcon} alt="preview-img" />
                 <PreviewTitle>미리보기</PreviewTitle>
               </>
             )}

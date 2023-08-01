@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { ReactComponent as ProfileSwitchIcon } from '../assets/profile_switch.svg';
-import { ReactComponent as Logo } from '../assets/preview_text.svg';
+import ProfileSwitchIcon from '../assets/profile_switch.svg';
+import Logo from '../assets/preview_text.svg';
 import Preview from './Preview';
 import { IHandlePreview } from '../types/IHandlePreview';
 
@@ -62,13 +62,13 @@ function Header({ onClick, isShow }: IHandlePreview) {
       {isShow && <Preview $isShow={isShow} />}
       <StickyTop>
         <Wrapper>
-          <Logo style={{ cursor: 'pointer' }} />
+          <img src={Logo} alt="logo" />
           <HeaderLink>wity.im/user</HeaderLink>
         </Wrapper>
         <Wrapper>
           <PreviewBtn onClick={onClick}>미리보기</PreviewBtn>
           <ProfileSwitch>
-            <ProfileSwitchIcon />
+            <img src={ProfileSwitchIcon} alt="profile" />
           </ProfileSwitch>
         </Wrapper>
       </StickyTop>

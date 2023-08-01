@@ -20,7 +20,7 @@ const Contents = styled.div`
   justify-content: flex-start;
   align-items: center;
   width: 361px;
-  border: 1px solid lightgray;
+  background-color: #fff;
   border-radius: 8px;
   margin-bottom: 10px;
 `;
