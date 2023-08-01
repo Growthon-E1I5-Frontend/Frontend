@@ -35,6 +35,12 @@ const Title = styled.div`
   margin-bottom: 10px;
 `;
 
+const DetailTitle = styled.h4`
+  font-size: 14px;
+  font-weight: 500;
+  margin: 10px 0;
+`;
+
 const AddCareerBtn = styled.button`
   border: none;
   outline: none;
@@ -56,7 +62,7 @@ export default function ExperienceTab() {
     <Accordion title="경험">
       <Career>
         <Title>
-          <h4>경력</h4>
+          <DetailTitle>경력</DetailTitle>
           <AddCareerBtn type="button">
             <img src={Add} alt="add" />
           </AddCareerBtn>
@@ -149,7 +155,7 @@ export default function ExperienceTab() {
       </Career>
       <Performance>
         <Title>
-          <h4>성과</h4>
+          <DetailTitle>성과</DetailTitle>
           <AddCareerBtn>
             <img src={Add} alt="add" />
           </AddCareerBtn>
