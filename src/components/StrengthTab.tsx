@@ -4,7 +4,7 @@ import Accordion from './common/Accordion';
 import Input from './common/Input';
 import Add from '../assets/plus.svg';
 
-interface IStrongPointTab {
+interface IStrengthTab {
   text: string;
 }
 
@@ -21,8 +21,8 @@ const AddBtn = styled.button`
   cursor: pointer;
 `;
 
-export default function StrongPointTab() {
-  const { register } = useForm<IStrongPointTab>();
+export default function StrengthTab() {
+  const { register } = useForm<IStrengthTab>();
 
   return (
     <Accordion title="장점">

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import ImageTab from '../components/ImageTab';
 
 const Container = styled.div`
+  width: 100%;
   height: 100%;
   background-color: #ffffff;
 `;
@@ -9,7 +9,7 @@ const Container = styled.div`
 function Setting() {
   return (
     <Container>
-      <ImageTab />
+      <h1>설정</h1>
     </Container>
   );
 }
