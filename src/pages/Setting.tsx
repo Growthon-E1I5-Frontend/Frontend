@@ -1,4 +1,5 @@
-import { styled } from 'styled-components';
+import styled from 'styled-components';
+import ImageTab from '../components/ImageTab';
 
 const Container = styled.div`
   height: 100%;
@@ -8,7 +9,7 @@ const Container = styled.div`
 function Setting() {
   return (
     <Container>
-      <h1>설정 페이지</h1>
+      <ImageTab />
     </Container>
   );
 }

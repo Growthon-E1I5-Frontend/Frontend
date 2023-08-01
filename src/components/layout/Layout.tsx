@@ -20,6 +20,9 @@ const Wrapper = styled.div`
   position: relative;
   overflow: auto;
   background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 function RootLayout() {
