@@ -22,7 +22,7 @@ const Navigation = styled.nav`
   border-top: 1px solid;
   border-top-color: #f3f3f3;
   background: #ffffff;
-  z-index: 100;
+  z-index: 5;
 `;
 
 const ListTab = styled.ul`

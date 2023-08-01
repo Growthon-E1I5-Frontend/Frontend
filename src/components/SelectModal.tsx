@@ -49,9 +49,9 @@ const Modal = styled.div`
   background-color: #fff;
   animation: ${popupAnimation} 0.3s ease-out;
   padding: 30px;
-  z-index: 10;
   border-top-right-radius: 24px;
   border-top-left-radius: 24px;
+  z-index: 50;
 `;
 
 const Context = styled.div`
@@ -88,25 +88,25 @@ export default function SelectModal({ onClickOption, onCloseModal }: IModal) {
               backgroundColor={PRIMARY}
               textColor={LIGHT_TEXT}
               onClick={() => onClickOption('experience')}
-              text="경력"
+              text="✍🏻 경력 (날짜 + 텍스트)"
             />
             <CategoryBtn
               backgroundColor={PRIMARY}
               textColor={LIGHT_TEXT}
               onClick={() => onClickOption('skill')}
-              text="스킬"
+              text="✍🏻 스킬 (막대 그래프 수치)"
             />
             <CategoryBtn
               backgroundColor={PRIMARY}
               textColor={LIGHT_TEXT}
               onClick={() => onClickOption('strength')}
-              text="장점"
+              text="✍🏻 장점 (텍스트)"
             />
             <CategoryBtn
               backgroundColor={PRIMARY}
               textColor={LIGHT_TEXT}
               onClick={() => onClickOption('project')}
-              text="프로젝트"
+              text="✍🏻 프로젝트 (이미지 + 링크)"
             />
           </div>
         </div>
@@ -119,13 +119,13 @@ export default function SelectModal({ onClickOption, onCloseModal }: IModal) {
               backgroundColor={EXTRA}
               textColor={DARK_TEXT}
               onClick={() => onClickOption('text')}
-              text="텍스트"
+              text="✍🏻 텍스트 (단순 제목 형태)"
             />
             <CategoryBtn
               backgroundColor={EXTRA}
               textColor={DARK_TEXT}
               onClick={() => onClickOption('link')}
-              text="링크"
+              text="🔗 링크 (URL로 이동 가능한 버튼)"
             />
           </div>
         </div>

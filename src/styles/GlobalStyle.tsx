@@ -61,7 +61,6 @@ const GlobalStyle = createGlobalStyle`
     'Helvetica Neue',
     sans-serif;
   box-sizing: border-box;
-  overflow-y: scroll;
 }
 
 * ::-webkit-scrollbar {
