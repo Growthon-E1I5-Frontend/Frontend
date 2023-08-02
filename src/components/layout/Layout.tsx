@@ -14,9 +14,9 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   width: 393px;
-  height: calc(100% - 111px);
+  height: calc(100% - 116px);
   margin-top: 51px;
-  margin-bottom: 60px;
+  margin-bottom: 65px;
   position: relative;
   overflow: auto;
   background-color: #fafafa;

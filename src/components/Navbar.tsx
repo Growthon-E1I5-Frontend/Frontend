@@ -17,7 +17,6 @@ const Navigation = styled.nav`
   position: fixed;
   bottom: 0;
   width: 393px;
-  height: 60px;
   padding: 12px;
   border-top: 1px solid;
   border-top-color: #f3f3f3;
@@ -49,13 +48,13 @@ const TabTitle = styled.span`
 const PreviewTab = styled.img`
   width: fit-content;
   position: absolute;
-  bottom: 25px;
+  bottom: 30px;
   cursor: pointer;
 `;
 
 const PreviewTitle = styled.span`
   position: absolute;
-  bottom: 7px;
+  bottom: 10px;
   font-size: 10px;
   color: #9d9d9d;
   font-weight: 600;
@@ -78,12 +77,10 @@ function Navbar({ onClick, isShow }: IHandlePreview) {
               <TabTitle>페이지</TabTitle>
             </Tab>
           </Link>
-          <Link to="/theme">
-            <Tab $isActive={pathname === '/theme'}>
-              <PiPaintBrushBroadLight size="20" />
-              <TabTitle>테마</TabTitle>
-            </Tab>
-          </Link>
+          <Tab $isActive={pathname === '/theme'}>
+            <PiPaintBrushBroadLight size="20" />
+            <TabTitle>테마</TabTitle>
+          </Tab>
           <Tab onClick={onClick}>
             {isShow ? (
               <Exit />
@@ -94,18 +91,14 @@ function Navbar({ onClick, isShow }: IHandlePreview) {
               </>
             )}
           </Tab>
-          <Link to="/analytics">
-            <Tab $isActive={pathname === '/analytics'}>
-              <BsGraphDown size="20" />
-              <TabTitle>분석</TabTitle>
-            </Tab>
-          </Link>
-          <Link to="setting">
-            <Tab $isActive={pathname === '/setting'}>
-              <IoEllipsisHorizontalOutline size="20" />
-              <TabTitle>설정</TabTitle>
-            </Tab>
-          </Link>
+          <Tab $isActive={pathname === '/analytics'}>
+            <BsGraphDown size="20" />
+            <TabTitle>분석</TabTitle>
+          </Tab>
+          <Tab $isActive={pathname === '/setting'}>
+            <IoEllipsisHorizontalOutline size="20" />
+            <TabTitle>설정</TabTitle>
+          </Tab>
         </ListTab>
       </Navigation>
     </>
