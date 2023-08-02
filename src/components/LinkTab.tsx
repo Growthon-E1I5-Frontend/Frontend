@@ -5,7 +5,7 @@ import Accordion from './common/Accordion';
 import AttachImage from './common/AttachImage';
 import ImageCropper from './ImageCropper';
 import useImageUploader from '../hooks/useImageUploader';
-import Input from './common/Input';
+import Input from '../styles/Input';
 
 interface ILinkTabForm {
   title: string;
@@ -25,12 +25,13 @@ export default function LinkTab() {
   } = useImageUploader();
   const {
     register,
+    handleSubmit,
     formState: { errors },
   } = useForm<ILinkTabForm>({ mode: 'onChange' });
 
-  // const onValid = ({ title, url }: ILinkTabForm) => {
-  //   console.log(title, url);
-  // };
+  const onValid = ({ title, url }: ILinkTabForm) => {
+    console.log(title, url);
+  };
 
   useEffect(() => {
     if (uploadImage) {
@@ -40,7 +41,7 @@ export default function LinkTab() {
 
   return (
     <Accordion title="링크">
-      <form>
+      <form onSubmit={handleSubmit(onValid)}>
         <Container>
           <ImageCropper aspectRatio={1 / 1} onCrop={handleUploadImage}>
             {compressedImage ? (

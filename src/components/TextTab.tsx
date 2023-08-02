@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import Accordion from './common/Accordion';
-import Input from './common/Input';
+import Input from '../styles/Input';
 
 interface ITextTab {
   text: string;

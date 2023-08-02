@@ -20,7 +20,6 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'react', 'prettier'],
   rules: {
-    'linebreak-style': ['error', 'unix'],
     semi: ['error', 'always'],
     'react/function-component-definition': [
       0,

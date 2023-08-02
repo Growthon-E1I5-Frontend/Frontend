@@ -62,6 +62,11 @@ const GlobalStyle = createGlobalStyle`
     sans-serif;
   box-sizing: border-box;
 }
+
+* ::-webkit-scrollbar {
+  width: 0;
+}
+
 html,
 body,
 div,

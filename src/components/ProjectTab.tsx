@@ -5,7 +5,7 @@ import AttachImage from './common/AttachImage';
 import Accordion from './common/Accordion';
 import ImageCropper from './ImageCropper';
 import useImageUploader from '../hooks/useImageUploader';
-import Input from './common/Input';
+import Input from '../styles/Input';
 import Checked from '../assets/check.svg';
 import NonChecked from '../assets/nonCheck.svg';
 import {
@@ -16,7 +16,7 @@ import {
   ProjectTerm,
   ProjectTermInput,
   To,
-} from './common/ProjectPeriod';
+} from '../styles/ProjectPeriod';
 
 interface IProjectTabForm {
   title: string;
@@ -43,6 +43,12 @@ const Loading = styled.p`
   margin: 0 10px;
 `;
 
+const Title = styled.h4`
+  font-size: 14px;
+  font-weight: 500;
+  margin: 10px 0;
+`;
+
 export default function ProjectTab() {
   const {
     register,
@@ -67,7 +73,7 @@ export default function ProjectTab() {
 
   return (
     <Accordion title="대표 프로젝트">
-      <h4>대표 이미지</h4>
+      <Title>대표 이미지</Title>
       <ImageWrapper>
         <ImageCropper aspectRatio={1 / 1} onCrop={handleUploadImage}>
           <AttachImage width={96} height={96} />
@@ -81,7 +87,7 @@ export default function ProjectTab() {
         )}
       </ImageWrapper>
       <form>
-        <h4>프로젝트 설명</h4>
+        <Title>프로젝트 설명</Title>
         <Input
           {...register('title', {
             required: true,
