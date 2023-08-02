@@ -2,9 +2,9 @@ import styled, { keyframes } from 'styled-components';
 import CategoryBtn from './common/CategoryBtn';
 
 type ComponentType =
-  | 'experience'
+  | 'exp'
   | 'skill'
-  | 'strength'
+  | 'advantage'
   | 'project'
   | 'text'
   | 'link';
@@ -87,7 +87,7 @@ export default function SelectModal({ onClickOption, onCloseModal }: IModal) {
             <CategoryBtn
               backgroundColor={PRIMARY}
               textColor={LIGHT_TEXT}
-              onClick={() => onClickOption('experience')}
+              onClick={() => onClickOption('exp')}
               text="✍🏻 경력 (날짜 + 텍스트)"
             />
             <CategoryBtn
@@ -99,7 +99,7 @@ export default function SelectModal({ onClickOption, onCloseModal }: IModal) {
             <CategoryBtn
               backgroundColor={PRIMARY}
               textColor={LIGHT_TEXT}
-              onClick={() => onClickOption('strength')}
+              onClick={() => onClickOption('advantage')}
               text="✍🏻 장점 (텍스트)"
             />
             <CategoryBtn

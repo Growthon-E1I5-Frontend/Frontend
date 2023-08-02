@@ -77,8 +77,15 @@ export default function SkillTab() {
               width={165}
               backgroundColor="#fff"
               border="1px solid #f3f3f3"
-              placeholder="숙련도 OO%, 그래프로 나타나요"
-              {...register(`skills.${index}.percent`, { required: true })}
+              placeholder="숙련도: 최대 100"
+              {...register(`skills.${index}.percent`, {
+                required: true,
+                pattern: {
+                  value: /^[0-9]+$/,
+                  message: 'Numbers Only',
+                },
+                max: 100,
+              })}
               defaultValue={item.percent}
             />
             <RemoveBtn type="button" onClick={() => remove(index)}>

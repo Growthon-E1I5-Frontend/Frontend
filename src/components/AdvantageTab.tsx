@@ -7,7 +7,7 @@ import Accordion from './common/Accordion';
 import Input from '../styles/Input';
 import Add from '../assets/plus.svg';
 
-interface IStrengthTab {
+interface IAdvantageTab {
   id: string;
   text: string;
 }
@@ -25,13 +25,13 @@ const AddBtn = styled.button`
   cursor: pointer;
 `;
 
-const StrengthWrapper = styled.div`
+const AdvantageWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   font-size: 12px;
 `;
 
-const Strength = styled.div`
+const Advantage = styled.div`
   display: flex;
   width: fit-content;
   padding: 10px;
@@ -48,12 +48,12 @@ const Delete = styled.span`
   cursor: pointer;
 `;
 
-export default function StrengthTab() {
-  const { register, handleSubmit, reset } = useForm<IStrengthTab>();
-  const [strength, setStrength] = useState<string[]>([]);
+export default function AdvantageTab() {
+  const { register, handleSubmit, reset } = useForm<IAdvantageTab>();
+  const [advantage, setAdvantage] = useState<string[]>([]);
 
-  const onValid = ({ text }: IStrengthTab) => {
-    setStrength((data) => [...data, text]);
+  const onValid = ({ text }: IAdvantageTab) => {
+    setAdvantage((data) => [...data, text]);
     reset();
   };
 
@@ -73,16 +73,16 @@ export default function StrengthTab() {
           <img src={Add} alt="add" />
         </AddBtn>
       </InputWrapper>
-      <StrengthWrapper>
-        {strength.map((item, index) => (
-          <Strength key={index}>
+      <AdvantageWrapper>
+        {advantage.map((item, index) => (
+          <Advantage key={index}>
             <span>{item}</span>
             <Delete onClick={onDelete}>
               <AiOutlineClose />
             </Delete>
-          </Strength>
+          </Advantage>
         ))}
-      </StrengthWrapper>
+      </AdvantageWrapper>
     </Accordion>
   );
 }

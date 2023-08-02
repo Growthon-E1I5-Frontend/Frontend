@@ -4,16 +4,16 @@ import styled from 'styled-components';
 import ProfileTab from '../components/ProfileTab';
 import SelectModal from '../components/SelectModal';
 import ExperienceTab from '../components/ExperienceTab';
-import StrengthTab from '../components/StrengthTab';
+import AdvantageTab from '../components/AdvantageTab';
 import ProjectTab from '../components/ProjectTab';
 import TextTab from '../components/TextTab';
 import LinkTab from '../components/LinkTab';
 import SkillTab from '../components/SkillTab';
 
 type ComponentType =
-  | 'experience'
+  | 'exp'
   | 'skill'
-  | 'strength'
+  | 'advantage'
   | 'project'
   | 'text'
   | 'link';
@@ -54,12 +54,12 @@ function Page() {
 
   const renderSelectedComponent = (componentType: ComponentType) => {
     switch (componentType) {
-      case 'experience':
+      case 'exp':
         return <ExperienceTab />;
       case 'skill':
         return <SkillTab />;
-      case 'strength':
-        return <StrengthTab />;
+      case 'advantage':
+        return <AdvantageTab />;
       case 'project':
         return <ProjectTab />;
       case 'text':
