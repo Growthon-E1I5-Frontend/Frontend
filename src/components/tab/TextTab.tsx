@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import Accordion from '../common/Accordion';
-import Input from '../common/Input';
 import DeleteTab from '../common/DeleteTab';
+import Input from '../../styles/Input';
 
 interface ITextTab {
   text: string;
