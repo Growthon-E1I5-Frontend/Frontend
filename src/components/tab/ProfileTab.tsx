@@ -1,15 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import Input from '../styles/Input';
-import Icon from '../assets/profile_icon.svg';
-import Down from '../assets/downArrow.svg';
-import Close from '../assets/upArrow.svg';
-import ProfileChange from '../assets/profile_change.svg';
-import ImageCropper from './ImageCropper';
-import useImageUploader from '../hooks/useImageUploader';
+import Input from '../../styles/Input';
+import Icon from '../../assets/profile_icon.svg';
+import Down from '../../assets/downArrow.svg';
+import Close from '../../assets/upArrow.svg';
+import ProfileChange from '../../assets/profile_change.svg';
+import useFileUpload from '../../hooks/useFileUpload';
 
 interface IProfileTab {
   isOpen: boolean;
+}
+
+interface IProfileForm {
+  name: string;
+  description: string;
 }
 
 const Profile = styled.div`
@@ -32,7 +37,7 @@ const ProfileIcon = styled.img`
 
 const Title = styled.span``;
 
-const ProfileInfo = styled.div<IProfileTab>`
+const ProfileInfo = styled.form<IProfileTab>`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -54,6 +59,7 @@ const ImgPreview = styled.img`
   width: 88px;
   height: 88px;
   border-radius: 50%;
+  object-fit: cover;
 `;
 
 const Change = styled.img`
@@ -61,22 +67,18 @@ const Change = styled.img`
 `;
 
 export default function ProfileTab() {
+  const { register, handleSubmit } = useForm<IProfileForm>();
   const [isOpen, setIsOpen] = useState(true);
-
-  const {
-    uploadImage,
-    compressedImage,
-    handleUploadImage,
-    handleCompressImage,
-  } = useImageUploader();
-
-  useEffect(() => {
-    if (uploadImage) {
-      handleCompressImage();
-    }
-  }, [uploadImage]);
+  const { imgData, previewImg, handleFileChange } = useFileUpload();
 
   const handleDropDown = () => setIsOpen((curr) => !curr);
+
+  const onValid = ({ name, description }: IProfileForm) => {
+    // 서버에 이미지, 닉네임, 나를 설명하는 한줄 저장하는 로직
+    console.log(imgData);
+    console.log(name);
+    console.log(description);
+  };
 
   return (
     <Profile>
@@ -89,23 +91,32 @@ export default function ProfileTab() {
           <img src={isOpen ? Close : Down} alt="dropdown" />
         </button>
       </TitleWrapper>
-      <ProfileInfo isOpen={isOpen}>
+      <ProfileInfo isOpen={isOpen} onBlur={handleSubmit(onValid)}>
         <ProfileImg>
-          <ImageCropper aspectRatio={1 / 1} onCrop={handleUploadImage}>
-            {compressedImage ? (
-              <ImgPreview src={compressedImage} alt="compressedImg" />
+          <label htmlFor="profile">
+            {previewImg ? (
+              <ImgPreview src={previewImg} alt="preview" />
             ) : (
               <Change src={ProfileChange} alt="ProfileIcon" />
             )}
-          </ImageCropper>
+          </label>
+          <input
+            onChange={handleFileChange}
+            type="file"
+            id="profile"
+            accept="image/*"
+            style={{ display: 'none' }}
+          />
         </ProfileImg>
         <Input
+          {...register('name')}
           width={337}
           border="none"
           backgroundColor="#F3F3F3"
           placeholder="닉네임을 적어주세요"
         />
         <Input
+          {...register('description')}
           width={337}
           border="none"
           backgroundColor="#F3F3F3"

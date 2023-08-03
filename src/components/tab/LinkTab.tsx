@@ -1,11 +1,10 @@
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import Accordion from './common/Accordion';
-import AttachImage from './common/AttachImage';
-import ImageCropper from './ImageCropper';
-import useImageUploader from '../hooks/useImageUploader';
-import Input from '../styles/Input';
+import Accordion from '../common/Accordion';
+import AttachImage from '../common/AttachImage';
+import Input from '../../styles/Input';
+import DeleteTab from '../common/DeleteTab';
+import useFileUpload from '../../hooks/useFileUpload';
 
 interface ILinkTabForm {
   title: string;
@@ -18,45 +17,42 @@ const Container = styled.div`
 
 export default function LinkTab() {
   const {
-    uploadImage,
-    compressedImage,
-    handleUploadImage,
-    handleCompressImage,
-  } = useImageUploader();
-  const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ILinkTabForm>({ mode: 'onChange' });
+  const { imgData, previewImg, handleFileChange } = useFileUpload();
 
   const onValid = ({ title, url }: ILinkTabForm) => {
+    console.log(imgData);
     console.log(title, url);
   };
 
-  useEffect(() => {
-    if (uploadImage) {
-      handleCompressImage();
-    }
-  }, [uploadImage]);
-
   return (
     <Accordion title="링크">
-      <form onSubmit={handleSubmit(onValid)}>
+      <form onBlur={handleSubmit(onValid)}>
         <Container>
-          <ImageCropper aspectRatio={1 / 1} onCrop={handleUploadImage}>
-            {compressedImage ? (
+          <label htmlFor="linkImg">
+            {previewImg ? (
               <AttachImage
                 width={40}
                 height={40}
-                imgSrc={compressedImage!}
-                imgAlt="compressedImg"
+                imgSrc={previewImg as string}
+                imgAlt="preview"
               />
             ) : (
               <AttachImage width={40} height={40} />
             )}
-          </ImageCropper>
+            <input
+              onChange={handleFileChange}
+              type="file"
+              id="linkImg"
+              accept="image/*"
+              style={{ display: 'none' }}
+            />
+          </label>
           <Input
-            {...register('title', { required: true })}
+            {...register('title')}
             placeholder="링크 제목"
             width={257}
             backgroundColor="#f3f3f3"
@@ -65,7 +61,6 @@ export default function LinkTab() {
         </Container>
         <Input
           {...register('url', {
-            required: true,
             pattern: {
               value: /^(https?:\/\/)?([\w-]+\.)+[\w]+(\/[\w-./?%&=]*)?$/,
               message: 'Wrong Pattern',
@@ -78,6 +73,7 @@ export default function LinkTab() {
           border={errors.url?.message ? '1px solid #E86363' : 'none'}
         />
       </form>
+      <DeleteTab id="linkTab" />
     </Accordion>
   );
 }

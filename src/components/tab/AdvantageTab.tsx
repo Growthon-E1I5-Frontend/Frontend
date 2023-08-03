@@ -3,16 +3,18 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { AiOutlineClose } from 'react-icons/ai';
-import Accordion from './common/Accordion';
-import Input from '../styles/Input';
-import Add from '../assets/plus.svg';
+import Accordion from '../common/Accordion';
+import Input from '../../styles/Input';
+import Add from '../../assets/plus.svg';
+import DeleteTab from '../common/DeleteTab';
 
-interface IStrengthTab {
+interface IAdvantageTab {
   id: string;
   text: string;
 }
 
 const InputWrapper = styled.form`
+  position: relative;
   display: flex;
   align-items: center;
 `;
@@ -25,13 +27,13 @@ const AddBtn = styled.button`
   cursor: pointer;
 `;
 
-const StrengthWrapper = styled.div`
+const AdvantageWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   font-size: 12px;
 `;
 
-const Strength = styled.div`
+const Advantage = styled.div`
   display: flex;
   width: fit-content;
   padding: 10px;
@@ -43,21 +45,25 @@ const Strength = styled.div`
   border-radius: 8px;
 `;
 
-const Delete = styled.span`
+const DeleteAdvantageBtn = styled.span`
   margin-left: 10px;
   cursor: pointer;
 `;
 
-export default function StrengthTab() {
-  const { register, handleSubmit, reset } = useForm<IStrengthTab>();
-  const [strength, setStrength] = useState<string[]>([]);
+export default function AdvantageTab() {
+  const { register, handleSubmit, reset } = useForm<IAdvantageTab>();
+  const [advantage, setAdvantage] = useState<string[]>([]);
 
-  const onValid = ({ text }: IStrengthTab) => {
-    setStrength((data) => [...data, text]);
+  const onValid = ({ text }: IAdvantageTab) => {
+    setAdvantage((data) => [...data, text]);
     reset();
   };
 
-  const onDelete = () => {};
+  const onDelete = (index: number) => {
+    setAdvantage((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  console.log(advantage);
 
   return (
     <Accordion title="장점">
@@ -73,16 +79,17 @@ export default function StrengthTab() {
           <img src={Add} alt="add" />
         </AddBtn>
       </InputWrapper>
-      <StrengthWrapper>
-        {strength.map((item, index) => (
-          <Strength key={index}>
+      <AdvantageWrapper>
+        {advantage.map((item, index) => (
+          <Advantage key={index}>
             <span>{item}</span>
-            <Delete onClick={onDelete}>
+            <DeleteAdvantageBtn onClick={() => onDelete(index)}>
               <AiOutlineClose />
-            </Delete>
-          </Strength>
+            </DeleteAdvantageBtn>
+          </Advantage>
         ))}
-      </StrengthWrapper>
+      </AdvantageWrapper>
+      <DeleteTab id="advantageTab" />
     </Accordion>
   );
 }

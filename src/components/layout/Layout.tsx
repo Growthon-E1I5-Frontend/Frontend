@@ -15,8 +15,8 @@ const Container = styled.div`
 const Wrapper = styled.div`
   width: 393px;
   height: calc(100% - 116px);
-  margin-top: 51px;
-  margin-bottom: 65px;
+  margin-top: 50px;
+  margin-bottom: 60px;
   position: relative;
   overflow: auto;
   background-color: #fafafa;

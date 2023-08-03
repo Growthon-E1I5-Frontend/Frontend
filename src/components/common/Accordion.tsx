@@ -4,7 +4,6 @@ import Drag from '../../assets/drag.svg';
 import Icon from '../../assets/toolIcon.svg';
 import Open from '../../assets/downArrow.svg';
 import Close from '../../assets/upArrow.svg';
-import Options from './Options';
 
 interface ITitle {
   title: string;
@@ -87,10 +86,7 @@ export default function Accordion({
           <Img src={isOpen ? Close : Open} alt="open" />
         </DropDownButton>
       </ContentsSummary>
-      <ChildrenContents isOpen={isOpen}>
-        {children}
-        <Options />
-      </ChildrenContents>
+      <ChildrenContents isOpen={isOpen}>{children}</ChildrenContents>
     </Contents>
   );
 }
