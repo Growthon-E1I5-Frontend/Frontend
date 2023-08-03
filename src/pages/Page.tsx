@@ -81,13 +81,15 @@ function Page() {
           onClickOption={handleClickOption}
         />
       ) : null}
-      <div>
-        {selectedComponents.map((selectedComponent, index) => (
-          <MyCategory key={index}>
-            {renderSelectedComponent(selectedComponent)}
-          </MyCategory>
-        ))}
-      </div>
+      {selectedComponents && (
+        <div>
+          {selectedComponents.map((selectedComponent, index) => (
+            <MyCategory key={index}>
+              {renderSelectedComponent(selectedComponent)}
+            </MyCategory>
+          ))}
+        </div>
+      )}
     </PageWrapper>
   );
 }

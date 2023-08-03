@@ -31,27 +31,32 @@ const popupAnimation = keyframes`
   }
 `;
 
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Backdrop = styled.div`
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;
-  height: calc(100% - 111px);
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 1;
 `;
 
 const Modal = styled.div`
-  position: absolute;
-  width: 100%;
-  left: 0;
+  width: 393px;
+  position: fixed;
   bottom: 0;
   background-color: #fff;
-  animation: ${popupAnimation} 0.3s ease-out;
+  animation: ${popupAnimation} 0.3s ease-in-out;
   padding: 30px;
   border-top-right-radius: 24px;
   border-top-left-radius: 24px;
-  z-index: 50;
+  z-index: 10;
 `;
 
 const Context = styled.div`
@@ -72,7 +77,7 @@ const AdditionalContext = styled.p`
 
 export default function SelectModal({ onClickOption, onCloseModal }: IModal) {
   return (
-    <>
+    <Container>
       <Backdrop onClick={onCloseModal} />
       <Modal>
         <Context>
@@ -130,6 +135,6 @@ export default function SelectModal({ onClickOption, onCloseModal }: IModal) {
           </div>
         </div>
       </Modal>
-    </>
+    </Container>
   );
 }
