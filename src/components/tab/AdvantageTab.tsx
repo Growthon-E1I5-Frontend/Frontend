@@ -3,9 +3,10 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { AiOutlineClose } from 'react-icons/ai';
-import Accordion from './common/Accordion';
-import Input from '../styles/Input';
-import Add from '../assets/plus.svg';
+import Accordion from '../common/Accordion';
+import Input from '../../styles/Input';
+import Add from '../../assets/plus.svg';
+import DeleteTab from '../common/DeleteTab';
 
 interface IAdvantageTab {
   id: string;
@@ -13,6 +14,7 @@ interface IAdvantageTab {
 }
 
 const InputWrapper = styled.form`
+  position: relative;
   display: flex;
   align-items: center;
 `;
@@ -43,7 +45,7 @@ const Advantage = styled.div`
   border-radius: 8px;
 `;
 
-const Delete = styled.span`
+const DeleteAdvantageBtn = styled.span`
   margin-left: 10px;
   cursor: pointer;
 `;
@@ -57,7 +59,11 @@ export default function AdvantageTab() {
     reset();
   };
 
-  const onDelete = () => {};
+  const onDelete = (index: number) => {
+    setAdvantage((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  console.log(advantage);
 
   return (
     <Accordion title="장점">
@@ -77,12 +83,13 @@ export default function AdvantageTab() {
         {advantage.map((item, index) => (
           <Advantage key={index}>
             <span>{item}</span>
-            <Delete onClick={onDelete}>
+            <DeleteAdvantageBtn onClick={() => onDelete(index)}>
               <AiOutlineClose />
-            </Delete>
+            </DeleteAdvantageBtn>
           </Advantage>
         ))}
       </AdvantageWrapper>
+      <DeleteTab id="advantageTab" />
     </Accordion>
   );
 }

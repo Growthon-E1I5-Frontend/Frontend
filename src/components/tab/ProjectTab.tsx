@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { v4 as uuid } from 'uuid';
 import styled from 'styled-components';
-import AttachImage from './common/AttachImage';
-import Accordion from './common/Accordion';
-import ImageCropper from './ImageCropper';
-import useImageUploader from '../hooks/useImageUploader';
-import Input from '../styles/Input';
-import Checked from '../assets/check.svg';
-import NonChecked from '../assets/nonCheck.svg';
+import AttachImage from '../common/AttachImage';
+import Accordion from '../common/Accordion';
+import Input from '../../styles/Input';
+import Checked from '../../assets/check.svg';
+import NonChecked from '../../assets/nonCheck.svg';
 import {
   InPrograssState,
   InProgressCheckboxWrapper,
@@ -16,7 +15,9 @@ import {
   ProjectTerm,
   ProjectTermInput,
   To,
-} from '../styles/ProjectPeriod';
+} from '../../styles/ProjectPeriod';
+import DeleteTab from '../common/DeleteTab';
+import useFileUpload from '../../hooks/useFileUpload';
 
 interface IProjectTabForm {
   title: string;
@@ -37,10 +38,7 @@ const ImgPreview = styled.img`
   height: 96px;
   border-radius: 8px;
   margin: 0 10px 6px 10px;
-`;
-
-const Loading = styled.p`
-  margin: 0 10px;
+  object-fit: cover;
 `;
 
 const Title = styled.h4`
@@ -50,43 +48,49 @@ const Title = styled.h4`
 `;
 
 export default function ProjectTab() {
+  const tabId = uuid();
   const {
     register,
     formState: { errors },
+    handleSubmit,
   } = useForm<IProjectTabForm>({ mode: 'onChange' });
-  const {
-    uploadImage,
-    compressedImage,
-    isCompressLoading,
-    handleUploadImage,
-    handleCompressImage,
-  } = useImageUploader();
   const [isChecked, setIsChecked] = useState(false);
+  const { imgData, previewImg, handleFileChange } = useFileUpload();
 
-  useEffect(() => {
-    if (uploadImage) {
-      handleCompressImage();
-    }
-  }, [uploadImage]);
+  console.log(tabId);
 
   const handleCheck = () => setIsChecked((prev) => !prev);
+
+  const onValid = ({
+    title,
+    startYear,
+    startMonth,
+    endYear,
+    endMonth,
+    role,
+  }: IProjectTabForm) => {
+    console.log(imgData, title, startYear, startMonth, endYear, endMonth, role);
+  };
 
   return (
     <Accordion title="대표 프로젝트">
       <Title>대표 이미지</Title>
-      <ImageWrapper>
-        <ImageCropper aspectRatio={1 / 1} onCrop={handleUploadImage}>
-          <AttachImage width={96} height={96} />
-        </ImageCropper>
-        {compressedImage ? (
-          <ImgPreview src={compressedImage} alt="compressedImg" />
-        ) : (
-          <Loading className="cover">
-            {isCompressLoading ? 'Loading...' : ''}
-          </Loading>
-        )}
-      </ImageWrapper>
-      <form>
+      <form onBlur={handleSubmit(onValid)}>
+        <ImageWrapper>
+          <label htmlFor="projectImg">
+            <AttachImage width={96} height={96} />
+            <input
+              onChange={handleFileChange}
+              type="file"
+              id="projectImg"
+              accept="image/*"
+              style={{ display: 'none' }}
+            />
+          </label>
+          {previewImg ? (
+            <ImgPreview src={previewImg} alt="compressedImg" />
+          ) : null}
+        </ImageWrapper>
         <Title>프로젝트 설명</Title>
         <Input
           {...register('title', {
@@ -176,6 +180,7 @@ export default function ProjectTab() {
           {...register('role', { required: true })}
         />
       </form>
+      <DeleteTab id={tabId} />
     </Accordion>
   );
 }

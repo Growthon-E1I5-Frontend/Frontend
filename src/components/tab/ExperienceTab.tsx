@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-import Accordion from './common/Accordion';
-import Input from '../styles/Input';
+import Accordion from '../common/Accordion';
+import Input from '../../styles/Input';
 import {
   ProjectPeriod,
   ProjectTerm,
@@ -11,10 +11,11 @@ import {
   InProgressCheckboxWrapper,
   InPrograssState,
   InProgressLabel,
-} from '../styles/ProjectPeriod';
-import Checked from '../assets/check.svg';
-import NonChecked from '../assets/nonCheck.svg';
-import Add from '../assets/plus.svg';
+} from '../../styles/ProjectPeriod';
+import Checked from '../../assets/check.svg';
+import NonChecked from '../../assets/nonCheck.svg';
+import Add from '../../assets/plus.svg';
+import DeleteTab from '../common/DeleteTab';
 
 interface IExperienceTabForm {
   startYear: number;
@@ -171,6 +172,7 @@ export default function ExperienceTab() {
           placeholder="관련 경험, 성과 등을 요약하여 입력해주세요."
         />
       </Performance>
+      <DeleteTab id="ExperienceTab" />
     </Accordion>
   );
 }

@@ -1,14 +1,14 @@
 /* eslint-disable react/no-array-index-key */
 import { useState } from 'react';
 import styled from 'styled-components';
-import ProfileTab from '../components/ProfileTab';
 import SelectModal from '../components/SelectModal';
-import ExperienceTab from '../components/ExperienceTab';
-import AdvantageTab from '../components/AdvantageTab';
-import ProjectTab from '../components/ProjectTab';
-import TextTab from '../components/TextTab';
-import LinkTab from '../components/LinkTab';
-import SkillTab from '../components/SkillTab';
+import ExperienceTab from '../components/tab/ExperienceTab';
+import SkillTab from '../components/tab/SkillTab';
+import AdvantageTab from '../components/tab/AdvantageTab';
+import LinkTab from '../components/tab/LinkTab';
+import ProfileTab from '../components/tab/ProfileTab';
+import ProjectTab from '../components/tab/ProjectTab';
+import TextTab from '../components/tab/TextTab';
 
 type ComponentType =
   | 'exp'

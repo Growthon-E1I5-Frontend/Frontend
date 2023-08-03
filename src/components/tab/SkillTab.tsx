@@ -1,8 +1,9 @@
 import { useFieldArray, useForm } from 'react-hook-form';
 import { AiOutlinePlus, AiOutlineClose } from 'react-icons/ai';
 import styled from 'styled-components';
-import Accordion from './common/Accordion';
-import Input from '../styles/Input';
+import Accordion from '../common/Accordion';
+import Input from '../../styles/Input';
+import DeleteTab from '../common/DeleteTab';
 
 interface FormData {
   skills: { skill: string; percent: number }[];
@@ -69,8 +70,7 @@ export default function SkillTab() {
               backgroundColor="#f3f3f3"
               border="none"
               placeholder="스킬명"
-              {...register(`skills.${index}.skill`, { required: true })}
-              defaultValue={item.skill}
+              {...register(`skills.${index}.skill`)}
             />
             <Space />
             <Input
@@ -84,9 +84,7 @@ export default function SkillTab() {
                   value: /^[0-9]+$/,
                   message: 'Numbers Only',
                 },
-                max: 100,
               })}
-              defaultValue={item.percent}
             />
             <RemoveBtn type="button" onClick={() => remove(index)}>
               <AiOutlineClose size="15" />
@@ -94,6 +92,7 @@ export default function SkillTab() {
           </SkillInputs>
         ))}
       </form>
+      <DeleteTab id="SkillTab" />
     </Accordion>
   );
 }
