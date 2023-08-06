@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import Input from '../../styles/Input';
@@ -7,6 +7,7 @@ import Down from '../../assets/downArrow.svg';
 import Close from '../../assets/upArrow.svg';
 import ProfileChange from '../../assets/profile_change.svg';
 import useFileUpload from '../../hooks/useFileUpload';
+import { getProfile, profiles } from '../../services/profile';
 
 interface IProfileTab {
   isOpen: boolean;
@@ -70,15 +71,39 @@ export default function ProfileTab() {
   const { register, handleSubmit } = useForm<IProfileForm>();
   const [isOpen, setIsOpen] = useState(true);
   const { imgData, previewImg, handleFileChange } = useFileUpload();
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [image, setImage] = useState<string | null>(null);
 
   const handleDropDown = () => setIsOpen((curr) => !curr);
 
-  const onValid = ({ name, description }: IProfileForm) => {
+  const onValid = async ({ name, description }: IProfileForm) => {
     // 서버에 이미지, 닉네임, 나를 설명하는 한줄 저장하는 로직
-    console.log(imgData);
-    console.log(name);
-    console.log(description);
+    const formData = new FormData();
+
+    if (imgData) {
+      formData.append('file', imgData);
+    }
+
+    formData.append('name', name);
+    formData.append('description', description);
+
+    await profiles(formData);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const profileData = await getProfile();
+
+      if (profileData && profileData.profile) {
+        setName(profileData.profile.name);
+        setDescription(profileData.profile.description);
+        setImage(profileData.profile.image.key);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <Profile>
@@ -94,8 +119,13 @@ export default function ProfileTab() {
       <ProfileInfo isOpen={isOpen} onBlur={handleSubmit(onValid)}>
         <ProfileImg>
           <label htmlFor="profile">
-            {previewImg ? (
-              <ImgPreview src={previewImg} alt="preview" />
+            {previewImg || image ? (
+              <ImgPreview
+                src={
+                  previewImg || `https://d20w5jfsolyn02.cloudfront.net/${image}`
+                }
+                alt="preview"
+              />
             ) : (
               <Change src={ProfileChange} alt="ProfileIcon" />
             )}
@@ -110,6 +140,7 @@ export default function ProfileTab() {
         </ProfileImg>
         <Input
           {...register('name')}
+          defaultValue={name}
           width={337}
           border="none"
           backgroundColor="#F3F3F3"
@@ -117,6 +148,7 @@ export default function ProfileTab() {
         />
         <Input
           {...register('description')}
+          defaultValue={description}
           width={337}
           border="none"
           backgroundColor="#F3F3F3"

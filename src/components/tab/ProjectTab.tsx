@@ -57,8 +57,6 @@ export default function ProjectTab() {
   const [isChecked, setIsChecked] = useState(false);
   const { imgData, previewImg, handleFileChange } = useFileUpload();
 
-  console.log(tabId);
-
   const handleCheck = () => setIsChecked((prev) => !prev);
 
   const onValid = ({

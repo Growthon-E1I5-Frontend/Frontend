@@ -19,8 +19,6 @@ export default function useFileUpload() {
       setPreviewImg(reader.result as string);
     };
     reader.readAsDataURL(files[0]);
-
-    console.log(imgData);
   };
 
   return { imgData, previewImg, handleFileChange };
