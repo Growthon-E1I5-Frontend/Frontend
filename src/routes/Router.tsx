@@ -1,12 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 // Page
-import LandingPage from '../pages/LandingPage';
+import LandingPage from '../pages/Landing';
 import Page from '../pages/Page';
-import Theme from '../pages/Theme';
-import Analytics from '../pages/Analytics';
-import Setting from '../pages/Setting';
 import Layout from '../components/layout/Layout';
+import LoginPage from '../pages/Login';
+import SignUp from '../pages/Signup';
+import Congrats from '../pages/Congrats';
 
 const router = createBrowserRouter([
   {
@@ -15,10 +15,19 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <LandingPage /> },
       { path: '/page', element: <Page /> },
-      { path: '/theme', element: <Theme /> },
-      { path: '/analytics', element: <Analytics /> },
-      { path: '/setting', element: <Setting /> },
     ],
+  },
+  {
+    path: '/login',
+    element: <LoginPage />,
+  },
+  {
+    path: '/signup',
+    element: <SignUp />,
+  },
+  {
+    path: '/congrats',
+    element: <Congrats />,
   },
 ]);
 
