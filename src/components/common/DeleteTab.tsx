@@ -3,15 +3,24 @@ import { styled as muiStyled } from '@mui/material/styles';
 import Switch, { SwitchProps } from '@mui/material/Switch';
 import Delete from '../../assets/delete.svg';
 
+interface ITabId {
+  id: string;
+}
+
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
-const Option = styled.div`
+const DeleteWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 5px;
-  margin-bottom: 16px;
+  margin: 10px 0;
+`;
+
+const DeleteTabBtn = styled.img`
+  margin: 10px 0;
+  right: 0;
+  cursor: pointer;
 `;
 
 const Toggle = muiStyled((props: SwitchProps) => (
@@ -65,15 +74,14 @@ const Toggle = muiStyled((props: SwitchProps) => (
   },
 }));
 
-const DeleteButton = styled.img`
-  cursor: pointer;
-`;
+export default function DeleteTab({ id }: ITabId) {
+  // 탭 삭제 API 연결
+  const onDelete = (id: string) => console.log(id);
 
-export default function Options() {
   return (
-    <Option>
+    <DeleteWrapper>
       <Toggle {...label} defaultChecked />
-      <DeleteButton src={Delete} alt="delete" />
-    </Option>
+      <DeleteTabBtn src={Delete} alt="delete" onClick={() => onDelete(id)} />
+    </DeleteWrapper>
   );
 }

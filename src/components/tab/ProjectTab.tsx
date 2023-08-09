@@ -1,78 +1,106 @@
 import { useState } from 'react';
-import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-import Accordion from './common/Accordion';
-import Input from './common/Input';
+import { v4 as uuid } from 'uuid';
+import styled from 'styled-components';
+import AttachImage from '../common/AttachImage';
+import Accordion from '../common/Accordion';
+import Input from '../../styles/Input';
+import Checked from '../../assets/check.svg';
+import NonChecked from '../../assets/nonCheck.svg';
 import {
+  InPrograssState,
+  InProgressCheckboxWrapper,
+  InProgressLabel,
   ProjectPeriod,
   ProjectTerm,
   ProjectTermInput,
   To,
-  InProgressCheckboxWrapper,
-  InPrograssState,
-  InProgressLabel,
-} from './common/ProjectPeriod';
-import Checked from '../assets/check.svg';
-import NonChecked from '../assets/nonCheck.svg';
-import Add from '../assets/plus.svg';
+} from '../../styles/ProjectPeriod';
+import DeleteTab from '../common/DeleteTab';
+import useFileUpload from '../../hooks/useFileUpload';
 
-interface IExperienceTabForm {
+interface IProjectTabForm {
+  title: string;
   startYear: number;
   startMonth: number;
   endYear: number;
   endMonth: number;
+  role: string;
 }
 
-const Career = styled.div`
-  margin-bottom: 10px;
-`;
-
-const Title = styled.div`
-  width: 100%;
+const ImageWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
 `;
 
-const AddCareerBtn = styled.button`
-  border: none;
-  outline: none;
-  background-color: inherit;
+const ImgPreview = styled.img`
+  width: 96px;
+  height: 96px;
+  border-radius: 8px;
+  margin: 0 10px 6px 10px;
+  object-fit: cover;
 `;
 
-const Performance = styled.div``;
+const Title = styled.h4`
+  font-size: 14px;
+  font-weight: 500;
+  margin: 10px 0;
+`;
 
-export default function ExperienceTab() {
+export default function ProjectTab() {
+  const tabId = uuid();
   const {
     register,
     formState: { errors },
-  } = useForm<IExperienceTabForm>({ mode: 'onChange' });
+    handleSubmit,
+  } = useForm<IProjectTabForm>({ mode: 'onChange' });
   const [isChecked, setIsChecked] = useState(false);
+  const { imgData, previewImg, handleFileChange } = useFileUpload();
+
+  console.log(tabId);
 
   const handleCheck = () => setIsChecked((prev) => !prev);
 
+  const onValid = ({
+    title,
+    startYear,
+    startMonth,
+    endYear,
+    endMonth,
+    role,
+  }: IProjectTabForm) => {
+    console.log(imgData, title, startYear, startMonth, endYear, endMonth, role);
+  };
+
   return (
-    <Accordion title="경험">
-      <Career>
-        <Title>
-          <h4>경력</h4>
-          <AddCareerBtn type="button">
-            <img src={Add} alt="add" />
-          </AddCareerBtn>
-        </Title>
+    <Accordion title="대표 프로젝트">
+      <Title>대표 이미지</Title>
+      <form onBlur={handleSubmit(onValid)}>
+        <ImageWrapper>
+          <label htmlFor="projectImg">
+            <AttachImage width={96} height={96} />
+            <input
+              onChange={handleFileChange}
+              type="file"
+              id="projectImg"
+              accept="image/*"
+              style={{ display: 'none' }}
+            />
+          </label>
+          {previewImg ? (
+            <ImgPreview src={previewImg} alt="compressedImg" />
+          ) : null}
+        </ImageWrapper>
+        <Title>프로젝트 설명</Title>
         <Input
+          {...register('title', {
+            required: true,
+          })}
+          placeholder="프로젝트명"
           width={305}
-          border="1px solid #f3f3f3"
-          placeholder="회사 / 프로젝트명"
+          backgroundColor="#fff"
+          border="1px solid #F3F3F3"
         />
-        <Input
-          width={148}
-          border="1px solid #f3f3f3"
-          placeholder="부서명 / 직책"
-          style={{ marginRight: '8px' }}
-        />
-        <Input width={148} border="1px solid #f3f3f3" placeholder="담당업무" />
         <ProjectPeriod>
           <ProjectTerm
             border={
@@ -116,7 +144,6 @@ export default function ExperienceTab() {
                 },
               })}
               placeholder="YYYY."
-              disabled={!!isChecked}
             />
             <ProjectTermInput
               {...register('endMonth', {
@@ -126,7 +153,6 @@ export default function ExperienceTab() {
                 },
               })}
               placeholder="MM"
-              disabled={!!isChecked}
             />
           </ProjectTerm>
           <InProgressCheckboxWrapper>
@@ -143,28 +169,18 @@ export default function ExperienceTab() {
                 onClick={handleCheck}
               />
             )}
-            <InProgressLabel>재직 중</InProgressLabel>
+            <InProgressLabel>진행 중</InProgressLabel>
           </InProgressCheckboxWrapper>
         </ProjectPeriod>
-      </Career>
-      <Performance>
-        <Title>
-          <h4>성과</h4>
-          <AddCareerBtn>
-            <img src={Add} alt="add" />
-          </AddCareerBtn>
-        </Title>
         <Input
+          placeholder="담당 역할"
           width={305}
+          backgroundColor="#fff"
           border="1px solid #f3f3f3"
-          placeholder="프로젝트 / 성과"
+          {...register('role', { required: true })}
         />
-        <Input
-          width={305}
-          border="1px solid #f3f3f3"
-          placeholder="관련 경험, 성과 등을 요약하여 입력해주세요."
-        />
-      </Performance>
+      </form>
+      <DeleteTab id={tabId} />
     </Accordion>
   );
 }

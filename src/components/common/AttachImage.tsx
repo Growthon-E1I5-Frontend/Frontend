@@ -16,6 +16,8 @@ const Img = styled.img<AttachImageProps>`
   height: ${(props) => props.height}px;
   border-radius: 8px;
   margin: 0 6px 6px 0;
+  cursor: pointer;
+  object-fit: cover;
 `;
 
 export default function AttachImage({

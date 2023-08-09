@@ -1,96 +1,85 @@
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useState } from 'react';
 import styled from 'styled-components';
-import AttachImage from './common/AttachImage';
-import Accordion from './common/Accordion';
-import ImageCropper from './ImageCropper';
-import useImageUploader from '../hooks/useImageUploader';
-import Input from './common/Input';
-import Checked from '../assets/check.svg';
-import NonChecked from '../assets/nonCheck.svg';
+import { useForm } from 'react-hook-form';
+import Accordion from '../common/Accordion';
+import Input from '../../styles/Input';
 import {
-  InPrograssState,
-  InProgressCheckboxWrapper,
-  InProgressLabel,
   ProjectPeriod,
   ProjectTerm,
   ProjectTermInput,
   To,
-} from './common/ProjectPeriod';
+  InProgressCheckboxWrapper,
+  InPrograssState,
+  InProgressLabel,
+} from '../../styles/ProjectPeriod';
+import Checked from '../../assets/check.svg';
+import NonChecked from '../../assets/nonCheck.svg';
+import Add from '../../assets/plus.svg';
+import DeleteTab from '../common/DeleteTab';
 
-interface IProjectTabForm {
-  title: string;
+interface IExperienceTabForm {
   startYear: number;
   startMonth: number;
   endYear: number;
   endMonth: number;
-  role: string;
 }
 
-const ImageWrapper = styled.div`
+const Career = styled.div`
+  margin-bottom: 10px;
+`;
+
+const Title = styled.div`
+  width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  margin-bottom: 10px;
 `;
 
-const ImgPreview = styled.img`
-  width: 96px;
-  height: 96px;
-  border-radius: 8px;
-  margin: 0 10px 6px 10px;
+const DetailTitle = styled.h4`
+  font-size: 14px;
+  font-weight: 500;
+  margin: 10px 0;
 `;
 
-const Loading = styled.p`
-  margin: 0 10px;
+const AddCareerBtn = styled.button`
+  border: none;
+  outline: none;
+  background-color: inherit;
 `;
 
-export default function ProjectTab() {
+const Performance = styled.div``;
+
+export default function ExperienceTab() {
   const {
     register,
     formState: { errors },
-  } = useForm<IProjectTabForm>({ mode: 'onChange' });
-  const {
-    uploadImage,
-    compressedImage,
-    isCompressLoading,
-    handleUploadImage,
-    handleCompressImage,
-  } = useImageUploader();
+  } = useForm<IExperienceTabForm>({ mode: 'onChange' });
   const [isChecked, setIsChecked] = useState(false);
-
-  useEffect(() => {
-    if (uploadImage) {
-      handleCompressImage();
-    }
-  }, [uploadImage]);
 
   const handleCheck = () => setIsChecked((prev) => !prev);
 
   return (
-    <Accordion title="대표 프로젝트">
-      <h4>대표 이미지</h4>
-      <ImageWrapper>
-        <ImageCropper aspectRatio={1 / 1} onCrop={handleUploadImage}>
-          <AttachImage width={96} height={96} />
-        </ImageCropper>
-        {compressedImage ? (
-          <ImgPreview src={compressedImage} alt="compressedImg" />
-        ) : (
-          <Loading className="cover">
-            {isCompressLoading ? 'Loading...' : ''}
-          </Loading>
-        )}
-      </ImageWrapper>
-      <form>
-        <h4>프로젝트 설명</h4>
+    <Accordion title="경험">
+      <Career>
+        <Title>
+          <DetailTitle>경력</DetailTitle>
+          <AddCareerBtn type="button">
+            <img src={Add} alt="add" />
+          </AddCareerBtn>
+        </Title>
         <Input
-          {...register('title', {
-            required: true,
-          })}
-          placeholder="프로젝트명"
           width={305}
-          backgroundColor="#fff"
-          border="1px solid #F3F3F3"
+          border="1px solid #f3f3f3"
+          placeholder="회사 / 프로젝트명"
         />
+        <Input
+          width={148}
+          border="1px solid #f3f3f3"
+          placeholder="부서명 / 직책"
+          style={{ marginRight: '8px' }}
+        />
+        <Input width={148} border="1px solid #f3f3f3" placeholder="담당업무" />
         <ProjectPeriod>
           <ProjectTerm
             border={
@@ -134,6 +123,7 @@ export default function ProjectTab() {
                 },
               })}
               placeholder="YYYY."
+              disabled={!!isChecked}
             />
             <ProjectTermInput
               {...register('endMonth', {
@@ -143,6 +133,7 @@ export default function ProjectTab() {
                 },
               })}
               placeholder="MM"
+              disabled={!!isChecked}
             />
           </ProjectTerm>
           <InProgressCheckboxWrapper>
@@ -159,17 +150,29 @@ export default function ProjectTab() {
                 onClick={handleCheck}
               />
             )}
-            <InProgressLabel>진행 중</InProgressLabel>
+            <InProgressLabel>재직 중</InProgressLabel>
           </InProgressCheckboxWrapper>
         </ProjectPeriod>
+      </Career>
+      <Performance>
+        <Title>
+          <DetailTitle>성과</DetailTitle>
+          <AddCareerBtn>
+            <img src={Add} alt="add" />
+          </AddCareerBtn>
+        </Title>
         <Input
-          placeholder="담당 역할"
           width={305}
-          backgroundColor="#fff"
           border="1px solid #f3f3f3"
-          {...register('role', { required: true })}
+          placeholder="프로젝트 / 성과"
         />
-      </form>
+        <Input
+          width={305}
+          border="1px solid #f3f3f3"
+          placeholder="관련 경험, 성과 등을 요약하여 입력해주세요."
+        />
+      </Performance>
+      <DeleteTab id="ExperienceTab" />
     </Accordion>
   );
 }
