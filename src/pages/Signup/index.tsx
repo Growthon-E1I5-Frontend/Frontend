@@ -23,7 +23,8 @@ function SignUp() {
     handleSubmit,
     getValues,
     watch,
-    formState: { errors, isSubmitting, isValid, submitCount },
+    reset,
+    formState: { errors, isSubmitting, isValid },
   } = useForm<FormValue>({ mode: 'onChange', reValidateMode: 'onSubmit' });
 
   const changePassword = watch('password');
@@ -45,45 +46,37 @@ function SignUp() {
         } else if (response.data.profile === undefined) {
           setCreatURL(true); // 사용 가능한 URL
         }
-
-        /* email 중복 조회 */
-      } else if (type === 'email') {
-        const response: number = await instance.get(`/users/sign-up/${data}`);
-
-        console.log('Usable account:', response);
       }
     } catch (error: any) {
-      if (error.response) {
-        const { status, data } = error.response;
+      const status = error.response;
 
-        if (status === 404) {
-          console.log('Usable Account:', data);
-        } else if (status === 400) {
-          setHandleErrorMessage(true); //  제출 버튼 무효화
-          console.log('Account Exists:', response);
-        }
+      if (status === 400) {
+        setHandleErrorMessage(true); //  제출 비활성화
       }
 
-      setCreatURL(true); // 500 에러 발생 시
+      setCreatURL(true); // 500 에러 발생 시 사용 가능한 URL
     }
   };
 
+  /* URL 중복조회 */
   const onDoubleCheck = (type: string): void => {
-    const data = type === 'url' ? getValues('url') : getValues('email');
+    const data = getValues('url');
 
     fetchData(data, type);
   };
 
+  /* 회원가입 폼 제출 & 이메일 중복조회 */
   const onSubmit = async (data: FormValue) => {
+    const response = await instance.post(`/users/sign-up`, data);
+
     try {
-      if (data.email) onDoubleCheck('email');
-
-      const response = await instance.post(`/users/sign-up`, data);
-
-      console.log('Congrats!:', response.data.result);
-      navigate('/congrats');
+      if (response.status === 201) {
+        console.log('Congrats!:', response.data.result);
+        navigate('/congrats');
+      }
     } catch (error) {
-      console.log('failed..', error);
+      console.log('error checking...');
+      if (response.status === 400) reset({ email: '' }); // reset 안되는 에러 고치기~~
     }
   };
 
@@ -244,23 +237,6 @@ function SignUp() {
               )}
             </S.Label>
           </S.InfoFieldset>
-          {handleErrorMessage && !isValid ? (
-            <small
-              role="alert"
-              style={{ color: '#e86363', fontSize: 10, marginBottom: 8 }}
-            >
-              이미 존재하는 계정입니다.
-            </small>
-          ) : (
-            submitCount !== 0 && (
-              <small
-                role="alert"
-                style={{ color: '#e86363', fontSize: 10, marginBottom: 8 }}
-              >
-                이미 존재하는 계정입니다.
-              </small>
-            )
-          )}
           <SubmitButton
             type="submit"
             disabled={!isValid || isSubmitting}

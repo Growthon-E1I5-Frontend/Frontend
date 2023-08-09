@@ -1,5 +1,7 @@
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import { S } from './style';
+import { authInstance } from '../../api/instance';
 import Logo from '../../assets/landingLogo.svg';
 import Input from '../../components/common/Input';
 import SubmitButton from '../../components/SubmitButton';
@@ -10,20 +12,29 @@ interface FormValue {
 }
 
 function LoginPage() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormValue>({ mode: 'onChange' });
 
+  /* 로그인 요청 */
   const onSubmit = async (data: FormValue) => {
     try {
-      console.log('success!', data);
+      const response = await authInstance.post(`/users/sign-in`, data);
+
+      if (response.status === 201) navigate('/page'); //  프로필 생성 페이지로 이동
+
+      console.log('success!', response);
     } catch (e) {
+      alert('가입하지 않은 계정입니다.');
       console.log('failed..', e);
     }
   };
 
+  /* react-hook-form register */
   const emailLogin = register('email', {
     required: '이메일은 필수 입력입니다.',
     pattern: {
@@ -35,8 +46,8 @@ function LoginPage() {
   const passwordLogin = register('password', {
     required: '비밀번호는 필수 입력입니다.',
     minLength: {
-      value: 9,
-      message: '9자리 이상 비밀번호를 입력하세요.',
+      value: 8,
+      message: '8자리 이상 비밀번호를 입력하세요.',
     },
   });
 
@@ -79,7 +90,7 @@ function LoginPage() {
               <small role="alert">{errors.password.message}</small>
             )}
           </S.Label>
-          <SubmitButton marginTop={26} marginBottom={16}>
+          <SubmitButton marginTop={26} marginBottom={16} type="submit">
             이메일로 로그인
           </SubmitButton>
           <S.SignupAnchor href="signup">1분만에 회원가입</S.SignupAnchor>

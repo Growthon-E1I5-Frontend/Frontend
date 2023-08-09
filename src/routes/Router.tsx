@@ -10,12 +10,13 @@ import Congrats from '../pages/Congrats';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/page',
     element: <Layout />,
-    children: [
-      { path: '/', element: <LandingPage /> },
-      { path: '/page', element: <Page /> },
-    ],
+    children: [{ path: '/page', element: <Page /> }],
+  },
+  {
+    path: '/',
+    element: <LandingPage />,
   },
   {
     path: '/login',
