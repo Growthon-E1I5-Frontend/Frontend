@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { S } from './style';
 import { authInstance } from '../../api/instance';
 import Logo from '../../assets/landingLogo.svg';
-import Input from '../../components/common/Input';
 import SubmitButton from '../../components/SubmitButton';
+import Input from '../../styles/Input';
 
 interface FormValue {
   email: string;
