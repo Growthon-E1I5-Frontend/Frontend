@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { v4 as uuid } from 'uuid';
 import styled from 'styled-components';
 import AttachImage from '../common/AttachImage';
 import Accordion from '../common/Accordion';
@@ -48,7 +47,6 @@ const Title = styled.h4`
 `;
 
 export default function ProjectTab() {
-  const tabId = uuid();
   const {
     register,
     formState: { errors },
@@ -178,7 +176,7 @@ export default function ProjectTab() {
           {...register('role', { required: true })}
         />
       </form>
-      <DeleteTab id={tabId} />
+      <DeleteTab id="project" />
     </Accordion>
   );
 }

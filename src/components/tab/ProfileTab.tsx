@@ -6,8 +6,8 @@ import Icon from '../../assets/profile_icon.svg';
 import Down from '../../assets/downArrow.svg';
 import Close from '../../assets/upArrow.svg';
 import ProfileChange from '../../assets/profile_change.svg';
-import useFileUpload from '../../hooks/useFileUpload';
-import { getProfile, profiles } from '../../services/profile';
+// import useFileUpload from '../../hooks/useFileUpload';
+// import { getProfile, profiles } from '../../services/profile';
 
 interface IProfileTab {
   isOpen: boolean;
@@ -56,53 +56,51 @@ const ProfileImg = styled.div`
   margin: 20px 0;
 `;
 
-const ImgPreview = styled.img`
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  object-fit: cover;
-`;
+// const ImgPreview = styled.img`
+//   width: 88px;
+//   height: 88px;
+//   border-radius: 50%;
+//   object-fit: cover;
+// `;
 
 const Change = styled.img`
   cursor: pointer;
 `;
 
 export default function ProfileTab() {
-  const { register, handleSubmit } = useForm<IProfileForm>();
+  const { register } = useForm<IProfileForm>();
   const [isOpen, setIsOpen] = useState(true);
-  const { imgData, previewImg, handleFileChange } = useFileUpload();
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [image, setImage] = useState<string | null>(null);
+  // const { imgData, handleFileChange } = useFileUpload();
+  // const [name, setName] = useState('');
+  // const [description, setDescription] = useState('');
+  // const [image, setImage] = useState<string | null>(null);
 
   const handleDropDown = () => setIsOpen((curr) => !curr);
 
-  const onValid = async ({ name, description }: IProfileForm) => {
-    // 서버에 이미지, 닉네임, 나를 설명하는 한줄 저장하는 로직
-    const formData = new FormData();
+  // 프로필 상단 사용자 이미지, 닉네임, 설명 저장
+  // const onValid = async ({ name, description }: IProfileForm) => {
+  //   const formData = new FormData();
 
-    if (imgData) {
-      formData.append('file', imgData);
-    }
+  //   if (imgData) {
+  //     formData.append('file', imgData);
+  //   }
 
-    formData.append('name', name);
-    formData.append('description', description);
+  //   formData.append('name', name);
+  //   formData.append('description', description);
 
-    await profiles(formData);
-  };
+  //   await profiles(formData);
+  // };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const profileData = await getProfile();
-
-      if (profileData && profileData.profile) {
-        setName(profileData.profile.name);
-        setDescription(profileData.profile.description);
-        setImage(profileData.profile.image.key);
-      }
-    };
-
-    fetchData();
+    // const fetchData = async () => {
+    //   const profileData = await getProfile();
+    //   if (profileData && profileData.profile) {
+    //     setName(profileData.profile.name);
+    //     setDescription(profileData.profile.description);
+    //     setImage(profileData.profile.image.key);
+    //   }
+    // };
+    // fetchData();
   }, []);
 
   return (
@@ -116,22 +114,21 @@ export default function ProfileTab() {
           <img src={isOpen ? Close : Down} alt="dropdown" />
         </button>
       </TitleWrapper>
-      <ProfileInfo isOpen={isOpen} onBlur={handleSubmit(onValid)}>
+      <ProfileInfo isOpen={isOpen}>
         <ProfileImg>
           <label htmlFor="profile">
-            {previewImg || image ? (
+            {/* {image ? (
               <ImgPreview
-                src={
-                  previewImg || `https://d20w5jfsolyn02.cloudfront.net/${image}`
-                }
+                src={`https://d20w5jfsolyn02.cloudfront.net/${image}`}
                 alt="preview"
               />
             ) : (
               <Change src={ProfileChange} alt="ProfileIcon" />
-            )}
+            )} */}
+            <Change src={ProfileChange} alt="ProfileIcon" />
           </label>
           <input
-            onChange={handleFileChange}
+            // onChange={handleFileChange}
             type="file"
             id="profile"
             accept="image/*"
@@ -140,7 +137,7 @@ export default function ProfileTab() {
         </ProfileImg>
         <Input
           {...register('name')}
-          defaultValue={name}
+          // defaultValue={name}
           width={337}
           border="none"
           backgroundColor="#F3F3F3"
@@ -148,7 +145,7 @@ export default function ProfileTab() {
         />
         <Input
           {...register('description')}
-          defaultValue={description}
+          // defaultValue={description}
           width={337}
           border="none"
           backgroundColor="#F3F3F3"
