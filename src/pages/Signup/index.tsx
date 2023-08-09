@@ -5,8 +5,8 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { S } from './style';
 import { instance } from '../../api/instance';
-import Input from '../../components/common/Input';
 import SubmitButton from '../../components/SubmitButton';
+import Input from '../../styles/Input';
 
 interface FormValue {
   email: string;
