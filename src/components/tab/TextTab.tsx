@@ -26,7 +26,7 @@ export default function TextTab() {
           border="none"
         />
       </Container>
-      <DeleteTab id="textTab" />
+      <DeleteTab id="text" />
     </Accordion>
   );
 }

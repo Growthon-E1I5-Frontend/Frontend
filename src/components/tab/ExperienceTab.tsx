@@ -172,7 +172,7 @@ export default function ExperienceTab() {
           placeholder="관련 경험, 성과 등을 요약하여 입력해주세요."
         />
       </Performance>
-      <DeleteTab id="ExperienceTab" />
+      <DeleteTab id="exp" />
     </Accordion>
   );
 }

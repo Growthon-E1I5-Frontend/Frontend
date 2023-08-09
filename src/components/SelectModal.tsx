@@ -1,14 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import CategoryBtn from './common/CategoryBtn';
 
-type ComponentType =
-  | 'exp'
-  | 'skill'
-  | 'advantage'
-  | 'project'
-  | 'text'
-  | 'link';
-
 const PRIMARY = '#7163E8';
 
 const EXTRA = '#F3F2FD';
@@ -18,8 +10,8 @@ const LIGHT_TEXT = '#FFF';
 const DARK_TEXT = '#000';
 
 interface IModal {
-  onClickOption: (component: ComponentType) => void;
   onCloseModal: () => void;
+  onAddTabs: (type: string, title: string) => void;
 }
 
 const popupAnimation = keyframes`
@@ -75,7 +67,7 @@ const AdditionalContext = styled.p`
   margin: 15px 0;
 `;
 
-export default function SelectModal({ onClickOption, onCloseModal }: IModal) {
+export default function SelectModal({ onCloseModal, onAddTabs }: IModal) {
   return (
     <Container>
       <Backdrop onClick={onCloseModal} />
@@ -90,27 +82,27 @@ export default function SelectModal({ onClickOption, onCloseModal }: IModal) {
           </AdditionalContext>
           <div>
             <CategoryBtn
+              onClick={() => {
+                onAddTabs('exp', '경험');
+              }}
               backgroundColor={PRIMARY}
               textColor={LIGHT_TEXT}
-              onClick={() => onClickOption('exp')}
               text="✍🏻 경력 (날짜 + 텍스트)"
             />
             <CategoryBtn
+              onClick={() => {
+                onAddTabs('skill', '스킬');
+              }}
               backgroundColor={PRIMARY}
               textColor={LIGHT_TEXT}
-              onClick={() => onClickOption('skill')}
               text="✍🏻 스킬 (막대 그래프 수치)"
             />
             <CategoryBtn
+              onClick={() => {
+                onAddTabs('project', '프로젝트');
+              }}
               backgroundColor={PRIMARY}
               textColor={LIGHT_TEXT}
-              onClick={() => onClickOption('advantage')}
-              text="✍🏻 장점 (텍스트)"
-            />
-            <CategoryBtn
-              backgroundColor={PRIMARY}
-              textColor={LIGHT_TEXT}
-              onClick={() => onClickOption('project')}
               text="✍🏻 프로젝트 (이미지 + 링크)"
             />
           </div>
@@ -121,15 +113,19 @@ export default function SelectModal({ onClickOption, onCloseModal }: IModal) {
           </AdditionalContext>
           <div>
             <CategoryBtn
+              onClick={() => {
+                onAddTabs('text', '텍스트');
+              }}
               backgroundColor={EXTRA}
               textColor={DARK_TEXT}
-              onClick={() => onClickOption('text')}
               text="✍🏻 텍스트 (단순 제목 형태)"
             />
             <CategoryBtn
+              onClick={() => {
+                onAddTabs('link', '링크');
+              }}
               backgroundColor={EXTRA}
               textColor={DARK_TEXT}
-              onClick={() => onClickOption('link')}
               text="🔗 링크 (URL로 이동 가능한 버튼)"
             />
           </div>

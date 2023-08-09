@@ -1,22 +1,13 @@
 /* eslint-disable react/no-array-index-key */
 import { useState } from 'react';
 import styled from 'styled-components';
+import ProfileTab from '../components/tab/ProfileTab';
 import SelectModal from '../components/SelectModal';
 import ExperienceTab from '../components/tab/ExperienceTab';
 import SkillTab from '../components/tab/SkillTab';
-import AdvantageTab from '../components/tab/AdvantageTab';
-import LinkTab from '../components/tab/LinkTab';
-import ProfileTab from '../components/tab/ProfileTab';
 import ProjectTab from '../components/tab/ProjectTab';
 import TextTab from '../components/tab/TextTab';
-
-type ComponentType =
-  | 'exp'
-  | 'skill'
-  | 'advantage'
-  | 'project'
-  | 'text'
-  | 'link';
+import LinkTab from '../components/tab/LinkTab';
 
 const PageWrapper = styled.section``;
 
@@ -35,61 +26,53 @@ const MyCategory = styled.div`
 `;
 
 function Page() {
-  const [selectedComponents, setSelectedComponents] = useState<ComponentType[]>(
-    []
-  );
-  const [showModal, setShowModal] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [tabs, setTabs] = useState<any[]>([]);
 
-  const handleButtonClick = () => {
-    setShowModal(!showModal);
-  };
+  const handleModal = () => setModal(!modal);
 
-  const handleClickOption = (component: ComponentType) => {
-    setSelectedComponents((prevSelectedComponents) => [
-      component,
-      ...prevSelectedComponents,
-    ]);
-    setShowModal(false);
-  };
+  // const onAddTabs = () => {}; // 탭 추가 시 해당 탭에 대한 정보 저장
+  const onAddTabs = (type: string, title: string) => {
+    setTabs((prev) => {
+      const newTabs = [{ type, title, info: {} }, ...prev];
+      // const sendDataToServer = async () => {
+      //   const formData = new FormData();
+      //   formData.append('tabs', JSON.stringify(newTabs));
+      //   await profiles(formData);
+      // };
+      // sendDataToServer();
 
-  const renderSelectedComponent = (componentType: ComponentType) => {
-    switch (componentType) {
-      case 'exp':
-        return <ExperienceTab />;
-      case 'skill':
-        return <SkillTab />;
-      case 'advantage':
-        return <AdvantageTab />;
-      case 'project':
-        return <ProjectTab />;
-      case 'text':
-        return <TextTab />;
-      case 'link':
-        return <LinkTab />;
-      default:
-        return null;
-    }
+      return newTabs;
+    });
+
+    setModal(!modal);
   };
 
   return (
     <PageWrapper>
       <ProfileTab />
-      <AddTabButton onClick={handleButtonClick}>+ 탭 추가</AddTabButton>
-      {showModal ? (
-        <SelectModal
-          onCloseModal={handleButtonClick}
-          onClickOption={handleClickOption}
-        />
-      ) : null}
-      {selectedComponents && (
-        <div>
-          {selectedComponents.map((selectedComponent, index) => (
-            <MyCategory key={index}>
-              {renderSelectedComponent(selectedComponent)}
-            </MyCategory>
-          ))}
-        </div>
+      <AddTabButton onClick={handleModal}>+ 탭 추가</AddTabButton>
+      {modal && (
+        <SelectModal onCloseModal={handleModal} onAddTabs={onAddTabs} />
       )}
+      <MyCategory>
+        {tabs.map((tab, index) => {
+          switch (tab.type) {
+            case 'exp':
+              return <ExperienceTab key={index} />;
+            case 'skill':
+              return <SkillTab key={index} />;
+            case 'project':
+              return <ProjectTab key={index} />;
+            case 'text':
+              return <TextTab key={index} />;
+            case 'link':
+              return <LinkTab key={index} />;
+            default:
+              return null;
+          }
+        })}
+      </MyCategory>
     </PageWrapper>
   );
 }

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface ICategoryBtn {
-  onClick: () => void;
+  onClick?: () => void;
   backgroundColor: string;
   text: string;
   textColor: string;
